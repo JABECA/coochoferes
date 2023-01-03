@@ -36,17 +36,31 @@
                                     <option value="fec_venc_TOP">TOP</option>
                                 </select>
                             </div>
+                           
+                            <div class="col-md-1">
+                                <label style="color: white;">Filtrar</label>
+                                <button class="form-control btn btn-info" id="filtrar">Filtrar</button>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            
                             <div class="col-md-3">
                                 <label>Estado</label>
-                                <select class="form-control status_id" name="status_id">
+                                <select class="form-control status_id">
                                     <option value="">Seleccione</option>
                                     <option value="1">Activo</option>
                                     <option value="2">Inactivo</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                                <label>Nmero interno: </label>
+                                <input type="number" name="num_interno" class="form-control num_interno" />
+                            </div>
+                            
                             <div class="col-md-1">
                                 <label style="color: white;">Filtrar</label>
-                                <button id="filtrar" class="btn btn-danger">Filtrar</button>
+                                <button class="form-control btn btn-info" id="filtrar2">Filtrar</button>
                             </div>
                         </div>
        
@@ -140,7 +154,7 @@
         //     });
         // });
 
-         $('.form_vehiculos').submit(function(e){
+        $('.form_vehiculos').submit(function(e){
             e.preventDefault();
             Swal.fire({
               title: 'Estas seguro(a) de eliminar el registro?',
@@ -173,10 +187,11 @@
                     ajax: {
                         url: "{{route('vehiculos.index')}}",
                         data: function(d) {
-                            d.status_id = $('.status_id').val(),
+                            d.status_id  = $('.status_id').val(),
                             d.start_date = $('.start_date').val(),
-                            d.end_date = $('.end_date').val(),
-                            d.documento = $('.documento').val()
+                            d.end_date   = $('.end_date').val(),
+                            d.documento  = $('.documento').val(),
+                            d.num_interno  = $('.num_interno').val()
                         },
                     },
                      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Toditos"]],
@@ -247,8 +262,15 @@
                             name: '# SOAT'
                         },
                         {
-                            data: 'fec_venc_SOAT',
-                            name: 'Fec Venv SOAT'
+                            "title": "Fec Venv SOAT",
+                            "data": "fec_venc_SOAT",
+                            className: "table_align_center",
+                            render: function(data, type, row, meta ) {
+                                if(row.fec_venc_SOAT >= 1){
+                                    return '<a class="btn btn-danger btn-sm" href="#" style="margin-right: 6px;">Vencido</a>';
+                                }else if(row.estado == 0)
+                                    return '<a class="btn btn-danger btn-sm" href="/vehiculos/'+row.id+'/1" data-bs-toggle="mensaje" title="Activar Registro" style="margin-right: 6px;">Inactivo</a>';
+                            }
                         },
                         {
                             data: 'num_RTM',
@@ -296,6 +318,14 @@
 
 
             $('#filtrar').click(function() {
+                // $('.status_id').empty();
+               
+                table.draw();
+
+            });
+
+            $('#filtrar2').click(function() {
+                // console.log( $('.num_interno').val() );
                 table.draw();
             });
 
