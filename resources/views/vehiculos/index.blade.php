@@ -154,6 +154,17 @@
         //     });
         // });
 
+        const semanaEnMilisegundos = 1000 * 60 * 60 * 24 * 7;
+        const diaEnMilisegundos = 1000 * 60 * 60 * 24;
+
+        date = new Date();
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        day = date.getDate(); 
+        hoy = year+'-'+month+'-'+day;
+        today = Date.parse(year+'-'+month+'-'+day);
+        let todaymenosSemana = today-semanaEnMilisegundos;
+
         $('.form_vehiculos').submit(function(e){
             e.preventDefault();
             Swal.fire({
@@ -266,10 +277,20 @@
                             "data": "fec_venc_SOAT",
                             className: "table_align_center",
                             render: function(data, type, row, meta ) {
-                                if(row.fec_venc_SOAT >= 1){
-                                    return '<a class="btn btn-danger btn-sm" href="#" style="margin-right: 6px;">Vencido</a>';
-                                }else if(row.estado == 0)
-                                    return '<a class="btn btn-danger btn-sm" href="/vehiculos/'+row.id+'/1" data-bs-toggle="mensaje" title="Activar Registro" style="margin-right: 6px;">Inactivo</a>';
+
+                                let fechaZoat = row.fec_venc_SOAT;
+                                let fechaVencimiento = Date.parse(fechaZoat);
+
+                                let fechaZoatMasSemana = fechaVencimiento+semanaEnMilisegundos;
+
+                                if(today > fechaVencimiento){
+                                    return '<a  href="#" style="margin-right: 6px;  color: red; font-size: 1.1em;">'+row.fec_venc_SOAT+'</a>';
+                                }else if(today+semanaEnMilisegundos > fechaVencimiento ){
+                                    return '<a  href="#" style="margin-right: 6px;  color: orange; font-size: 1.1em;">'+row.fec_venc_SOAT+'</a>';
+                                }else{
+                                    return '<a  href="#" style="margin-right: 6px; color: green; font-size: 1.1em;">'+row.fec_venc_SOAT+'</a>';
+                                }                              
+                                
                             }
                         },
                         {
@@ -330,6 +351,8 @@
             });
 
         });
+
+       
 
 
         

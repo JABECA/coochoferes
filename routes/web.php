@@ -10,6 +10,7 @@ use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\InsidenteController;
+use App\Http\Controllers\RegpasajerosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('personas', PersonaController::class);
     Route::resource('exams', ExamController::class);
     Route::resource('insidentes', InsidenteController::class);
+    Route::resource('regpasajeros', RegpasajerosController::class);
 });
 
 // Se colocan las rutas personalizadas de las rutas del controlador resource que la contiene, 

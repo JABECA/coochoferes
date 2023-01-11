@@ -42,16 +42,16 @@ class VehiculoController extends Controller
             $documento   = $request->get('documento');
             $num_interno = $request->get('num_interno');
 
-            // if (  ( $request->has('status_id') && !empty($request->get('status_id') ) ) ) {
-            //         $estado    = $request->get('status_id');
-            //         $estado = $request->get('status_id') == 2 ? $estado = 0 : $estado = $estado;
-            //         $vehiculos = Vehiculos::All()->where('estado', $estado);
-            //         return DataTables::of($vehiculos)
-            //                 ->addColumn('actions', 'vehiculos.actions')
-            //                 ->rawColumns(['actions'])
-            //                 ->make(true);
+            if (  ( $request->has('status_id') && !empty($request->get('status_id') ) ) ) {
+                    $estado    = $request->get('status_id');
+                    $estado = $request->get('status_id') == 2 ? $estado = 0 : $estado = $estado;
+                    $vehiculos = Vehiculos::All()->where('estado', $estado);
+                    return DataTables::of($vehiculos)
+                            ->addColumn('actions', 'vehiculos.actions')
+                            ->rawColumns(['actions'])
+                            ->make(true);
                    
-            // }
+            }
 
             if (  ( $request->has('num_interno') && !empty($request->get('num_interno') ) ) ) {
                     $estado    = $request->get('status_id');
