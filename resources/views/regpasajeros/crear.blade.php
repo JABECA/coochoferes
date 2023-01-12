@@ -42,8 +42,18 @@
 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Numero Interno:</label>                                    
-                                    {!! Form::select('num_interno', $Numerosinternos, NULL, ['class' => 'select2 form-control num_interno']  ) !!}
+                                    <label for="">Numero Interno:</label>
+                                    <select class="select2 form-control num_interno" name="num_interno" id="num_interno">
+                                        <option value="" selected>Seleccione un vehiculo: </option>
+                                        <?php 
+                                        foreach ($Numerosinternos as $key => $value) {
+                                            echo "<option value='".$value."'> ".$value."<option/>";
+                                        }
+
+                                        ?>
+
+                                    </select>                                    
+                                    <!-- {!! Form::select('num_interno', $Numerosinternos, NULL, ['class' => 'select2 form-control num_interno']  ) !!} -->
                                 </div>
                             </div>
 
