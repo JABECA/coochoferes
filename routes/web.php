@@ -23,7 +23,15 @@ use App\Http\Controllers\RegpasajerosController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
+    return view('auth.login');
+});
+
+Route::get('/welcome', function () {
     return view('welcome');
 });
 

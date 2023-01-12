@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
+
 class LoginController extends Controller
 {
     /*
@@ -19,14 +22,25 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, HasRoles;
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    public function redirectTo(){
+
+        return $this->redirectTo = RouteServiceProvider::WELCOME;
+
+        // if(Auth::user()->hasAnyRole('Administrador')){
+        //     return $this->redirectTo = RouteServiceProvider::WELCOME;
+            
+        // }elseif(Auth::user()->hasAnyRole('Operativo')){
+        //     return $this->redirectTo = RouteServiceProvider::REGPASAJEROS;
+        // }
+    }
 
     /**
      * Create a new controller instance.

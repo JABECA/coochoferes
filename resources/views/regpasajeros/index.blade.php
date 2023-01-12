@@ -14,7 +14,9 @@
         <?php 
             $fecha_actual = date("d-m-Y");
             $minFceha = date("d-m-Y",strtotime($fecha_actual." - 1 days"));
-            $maxFecha = date("d-m-Y",strtotime($fecha_actual." + 1 days"));  
+            $maxFecha = date("d-m-Y",strtotime($fecha_actual." + 1 days")); 
+
+
         ?>
 
         <div class="section-body">
@@ -58,11 +60,12 @@
                                     <thead class="tabla-header-bg">
                                         <th style="display: none;">ID</th>                                                       
                                         <th ># Interno</th>
-                                        <th >Cantidad Pasajeros</th>
+                                        <th >Cantidad Pasajeros Ruta</th>
+                                        <th >Cantidad Pasajeros Terminal</th>
+                                        <th >Ruta</th>
                                         <th style="color:#fff;">Fecha</th>
-                                        <th style="color:#fff;">Valor pasaje</th>
-                                        <th style="color:#fff;">Total cuadre</th>
-                                        <th style="color:#fff;">Acciones</th>
+                                       
+                                        <!-- <th style="color:#fff;">Acciones</th> -->
                                     </thead>  
                                     <tbody>
                                  
@@ -178,11 +181,14 @@
                       "aaSorting": [[1, 'desc']],
                     dataType: 'json',
                     type: "POST",
-                    columns: [{
+                    columns: [
+
+                        {
                             data: 'id',
                             name: 'id',
                             searchable: true,
-                            orderable: true
+                            orderable: true,
+                            visible: false
 
                         },
                         {
@@ -198,32 +204,36 @@
                             orderable: true
 
                         },
+                        {
+                            data: 'cant_pasajeros_terminal',
+                            name: 'Cantida de Pasajeros Terminal',
+                            searchable: true,
+                            orderable: true
+
+                        },
+
+                        {
+                            data: 'ruta',
+                            name: 'Ruta',
+                            searchable: false,
+                            orderable: false
+                        },
                        
                         {
                             data: 'fecha_registro',
                             name: 'Fecha'
-                        },
-                        {
-                            data: 'valor_pasaje',
-                            name: 'Total cuadre',
-                            searchable: false,
-                            orderable: false
-                        },
-                           {
-                            data: 'total_cuadre',
-                            name: 'Total cuadre',
-                            searchable: false,
-                            orderable: false
-                        },
-                        
-                        {
-                            "title": "Acciones",
-                            "data": "id",
-                            className: "table_align_center",
-                            render: function(data, type, row, meta ) {
-                                return '<div class="btn-group"><a class="btn btn-success btn-sm" href="/regpasajeros/'+data+'" style="margin-right: 6px;"><i class="fa fa-eye"></i></a><a class="btn btn-info btn-sm" href="/regpasajeros/'+data+'/edit"><i class="fas fa-pencil-alt"></i></a></div>';
-                            }
                         }
+                        
+                       
+                        
+                        // {
+                        //     "title": "Acciones",
+                        //     "data": "id",
+                        //     className: "table_align_center",
+                        //     render: function(data, type, row, meta ) {
+                        //         return '<div class="btn-group"><a class="btn btn-success btn-sm" href="/regpasajeros/'+data+'" style="margin-right: 6px;" disabled><i class="fa fa-eye"></i></a><a class="btn btn-info btn-sm" href="/regpasajeros/'+data+'/edit" disabled><i class="fas fa-pencil-alt"></i></a></div>';
+                        //     }
+                        // }
                     ]
 
             });

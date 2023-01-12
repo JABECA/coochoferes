@@ -17,6 +17,8 @@ class CreateRegpasajerosTable extends Migration
             $table->id();
             $table->integer('num_interno');
             $table->integer('cant_pasajeros');
+            $table->integer('cant_pasajeros_terminal')->nullable();
+            $table->string('ruta')->nullable();
             $table->date('fecha_registro')->nullable();
             $table->integer('valor_pasaje')->nullable();
             $table->integer('total_cuadre')->nullable();

@@ -40,7 +40,29 @@
                         
                         <div class="row">
 
-                             <div class="col-xs-12 col-sm-3 col-md-3">
+                            <div class="col-xs-12 col-sm-3 col-md-3">
+                                <div class="form-group">
+                                    <label for="">Numero Interno:</label>                                    
+                                    {!! Form::select('num_interno', $Numerosinternos, NULL, ['class' => 'select2 form-control num_interno']  ) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3 col-md-3">
+                                <div class="form-group">
+                                    <label for="">Cantidad Pasajeros Terminal:</label>
+                                    <input  class="form-control" type="number"  max="19" name="cant_pasajeros_terminal" id="cant_pasajeros_terminal">
+                                    <!-- {!! Form::number('cant_pasajeros_terminal', null, array('class' => 'form-control')) !!} -->
+                                </div>
+                            </div>
+                           
+                            <div class="col-xs-12 col-sm-3 col-md-3">
+                                <div class="form-group">
+                                    <label for="">Cantidad Pasajeros Ruta:</label>
+                                    {!! Form::number('cant_pasajeros', null, array('class' => 'form-control cant_pasajeros')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
                                     <label for="">Fecha:</label>
                                     <input type="date" name="fecha_registro" min="<?php echo $minFceha; ?>" max="<?php echo $maxFecha; ?>"  value="<?php echo $maxFecha; ?>" class="form-control fecha_registro" />  
@@ -49,20 +71,25 @@
 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Numero Interno:</label>                                    
-                                    {!! Form::select('num_interno', $Numerosinternos, NULL, ['class' => 'select2 form-control']  ) !!}
+                                    <label for="">Ruta:</label>
+                                    <select class="select2 form-control" id="ruta" name="ruta">
+                                        <option value="Virginia">Virginia</option>
+                                        <option  value="Cartago">Cartago</option>
+                                        <option value="Armenia">Armenia</option>
+                                    </select>
                                 </div>
                             </div>
-                           
-                            <div class="col-xs-12 col-sm-3 col-md-3">
+
+                            <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label for="">Cantidad Pasajeros:</label>
-                                    {!! Form::number('cant_pasajeros', null, array('class' => 'form-control')) !!}
+                                    <label for="">Observaciones:</label>
+                                    <input type="text" name="observaciones" class="form-control observaciones" placeholder="este campo puede ir vacio">
                                 </div>
                             </div>
 
 
-                            <div class="col-xs-12 col-sm-3 col-md-3" style="display: block;">
+
+                            <div class="col-xs-12 col-sm-3 col-md-3" style="display: none;">
                                 <div class="form-group">
                                     <label for="">Usuario Crea:</label>
                                     {!! Form::text('usr_crea', \Illuminate\Support\Facades\Auth::user()->name , array('class' => 'form-control')) !!}
@@ -86,8 +113,10 @@
 
         $('.form_regpasajeros').submit(function(e){
                     e.preventDefault();
+                    let pasajerosRuta = $('.cant_pasajeros').val();
+                    let vehiculo = $('.num_interno').val();
                     Swal.fire({
-                      title: 'Estas seguro(a) de registrar la cantida de pasajeros ingresada?',
+                      title: 'Estas seguro(a) de registrar '+pasajerosRuta+' pasajeros en ruta para el vehiculo numero '+vehiculo+'?',
                       text: "No podrás revertir esto!",
                       icon: 'warning',
                       showCancelButton: true,

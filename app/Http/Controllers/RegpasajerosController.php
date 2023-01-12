@@ -12,11 +12,11 @@ class RegpasajerosController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:ver-regpasajero|crear-regpasajero|editar-regpasajero|borrar-regpasajero')->only('index');
-         $this->middleware('permission:ver-regpasajero', ['only' => ['show']]);
-         $this->middleware('permission:crear-regpasajero', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-regpasajero', ['only' => ['edit','update']]);
-         $this->middleware('permission:borrar-regpasajero', ['only' => ['destroy']]);
+         $this->middleware('permission:ver-regpasajeros|crear-regpasajeros|editar-regpasajeros|borrar-regpasajeros')->only('index');
+         $this->middleware('permission:ver-regpasajeros', ['only' => ['show']]);
+         $this->middleware('permission:crear-regpasajeros', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-regpasajeros', ['only' => ['edit','update']]);
+         $this->middleware('permission:borrar-regpasajeros', ['only' => ['destroy']]);
 
     }
     /**
@@ -32,6 +32,8 @@ class RegpasajerosController extends Controller
             $fecini      = $request->get('fecha_ini');
             $fecfin      = $request->get('fecha_fin');
             $num_interno = $request->get('num_interno');
+            $userName = \Illuminate\Support\Facades\Auth::user()->name;
+            
 
             // if (  ( $request->has('num_interno') && !empty($request->get('num_interno') ) ) ) {
             //         $estado    = $request->get('status_id');
@@ -74,8 +76,8 @@ class RegpasajerosController extends Controller
             
             // $numerosInternos = Numerosinternos::All(); 
 
-            $regpasajeros = Regpasajeros::where('estado', 1)->orderBy('num_interno', 'asc')->get(); 
-            // dd($regpasajeros); die();
+            $regpasajeros = Regpasajeros::where('estado', 1)->where('usr_crea', $userName)->orderBy('id', 'desc')->get(); 
+             // dd($regpasajeros); die();
             // $vehiculos = [];
             return DataTables::of($regpasajeros)
                     ->addColumn('actions', 'regpasajeros.actions')
@@ -120,18 +122,34 @@ class RegpasajerosController extends Controller
         //validamos la entrada de los campos del formulario de creacion de nuevo regpasajero
         request()->validate(
             [   
-                'num_interno'      => 'required',
-                'fecha_registro' => 'required',
-                'cant_pasajeros' => 'required',
+                'num_interno'             => 'required',
+                'fecha_registro'          => 'required',
+                'cant_pasajeros'          => 'required',
+                'cant_pasajeros_terminal' => 'required|max:19',
+                'ruta'                    => 'required',
             ],
            
         );
 
-        $regpasajero->num_interno     = $request->num_interno     ;
-        $regpasajero->fecha_registro  = $request->fecha_registro  ;
-        $regpasajero->cant_pasajeros  = $request->cant_pasajeros  ;
-        $regpasajero->usr_crea        = $request->usr_crea        ;
-        $regpasajero->total_cuadre    = $request->cant_pasajeros*2000;
+        if ($request->ruta == 'Virginia') {
+            $tarifa = 2000;
+        }else if($request->ruta == 'Cartago'){
+            $tarifa = 3000;
+        }else if($request->ruta == 'Armenia'){
+            $tarifa = 7000;
+        }else{
+            $tarifa = 2000;
+        }
+
+        $regpasajero->num_interno              = $request->num_interno;
+        $regpasajero->cant_pasajeros           = $request->cant_pasajeros;
+        $regpasajero->cant_pasajeros_terminal  = $request->cant_pasajeros_terminal;
+        $regpasajero->ruta                     = $request->ruta;
+        $regpasajero->fecha_registro           = $request->fecha_registro  ;
+        $regpasajero->valor_pasaje             = $tarifa;
+        $regpasajero->total_cuadre             = $request->cant_pasajeros*$tarifa;
+        $regpasajero->usr_crea                 = $request->usr_crea        ;
+        $regpasajero->observaciones            = $request->observaciones        ;
    
         $regpasajero->save();
 
