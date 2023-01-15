@@ -76,4 +76,7 @@ Route::put('/insidentes/{insidente}',  [App\Http\Controllers\InsidenteController
 Route::get('/insidentes/placas',  [App\Http\Controllers\InsidenteController::class, 'getPlaca'] )->name('insidentes.placas');
 
 
+Route::get('/regpasajeros/{regpasajero}/liquidar',  [App\Http\Controllers\RegpasajerosController::class, 'liquidar'] )->name('regpasajeros.liquidar');
+Route::put('/regpasajeros/{regpasajero}',  [App\Http\Controllers\RegpasajerosController::class, 'updateLiquidacion'] )->name('regpasajeros.ubdateLiquidacion');
+
 

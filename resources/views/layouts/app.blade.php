@@ -155,7 +155,13 @@
                         }
                     },
                   
-                ]
+                ],
+                columnDefs: [
+                    { //Centro el contenido de las n últimas columnas
+                        className: "text-center",
+                        targets: "_all"
+                    }
+                ],
             });
         
         

@@ -9,14 +9,12 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Registro de pasajeros</h3>
+            <h3 class="page__heading">Recaudo de vehiculos</h3>
         </div>
         <?php 
             $fecha_actual = date("d-m-Y");
             $minFceha = date("d-m-Y",strtotime($fecha_actual." - 1 days"));
             $maxFecha = date("d-m-Y",strtotime($fecha_actual." + 1 days")); 
-
-
         ?>
 
         <div class="section-body">
@@ -60,12 +58,15 @@
                                     <thead class="tabla-header-bg">
                                         <th style="display: none;">ID</th>                                                       
                                         <th ># Interno</th>
-                                        <th >Cantidad Pasajeros Ruta</th>
                                         <th >Cantidad Pasajeros Terminal</th>
+                                        <th >Cantidad Pasajeros Ruta</th>
                                         <th >Ruta</th>
-                                        <th style="color:#fff;">Fecha</th>
-                                       
-                                        <!-- <th style="color:#fff;">Acciones</th> -->
+                                        <th >Total cuadre</th>
+                                        <th >Fecha Ruta</th>
+                                        <th >Fecha/Hora Liquidacion</th>
+                                        <th >Codigo recaudo</th>
+                                        <th >Estado</th>
+                                        <th style="color:#fff;">Acciones</th>
                                     </thead>  
                                     <tbody>
                                  
@@ -181,6 +182,7 @@
                       "aaSorting": [[1, 'desc']],
                     dataType: 'json',
                     type: "POST",
+                    dom: 'lBfrtip',
                     columns: [
 
                         {
@@ -198,15 +200,15 @@
                             orderable: true
                         },
                         {
-                            data: 'cant_pasajeros',
-                            name: 'Cantida de Pasajeros',
+                            data: 'cant_pasajeros_terminal',
+                            name: 'Cantida de Pasajeros Terminal',
                             searchable: true,
                             orderable: true
 
                         },
                         {
-                            data: 'cant_pasajeros_terminal',
-                            name: 'Cantida de Pasajeros Terminal',
+                            data: 'cant_pasajeros',
+                            name: 'Cantida de Pasajeros',
                             searchable: true,
                             orderable: true
 
@@ -218,22 +220,51 @@
                             searchable: false,
                             orderable: false
                         },
+                        {
+                            data: 'total_cuadre',
+                            name: 'Ruta',
+                            searchable: false,
+                            orderable: false
+                        },
                        
                         {
                             data: 'fecha_registro',
-                            name: 'Fecha'
+                            name: 'Fecha Ruta'
+                        },
+
+                        {
+                            data: 'hora_registro',
+                            name: 'Fecha/Hora liquidacion'
+                        },
+                        {
+                            data: 'cod_recaudo',
+                            name: 'Recibo de pago',
+                            searchable: false,
+                            orderable: false,
+                            visible: false
+                        },
+
+                        {   
+                            "title": "Estado",
+                            "data": "cod_recaudo",
+                            render: function(data, type, row, meta ) {
+                                if(row.cod_recaudo == null){
+                                    return '<a class="btn btn-danger btn-sm" href="#" data-bs-toggle="mensaje" title="pdte de pago" style="margin-right: 6px;">Pendiente de pago</a>';
+                                }else if(row.cod_recaudo != null)
+                                    return '<a class="btn btn-success btn-sm" href="#" data-bs-toggle="mensaje" title="liquidado" style="margin-right: 6px;">Liquidado con recibo '+data+'</a>';
+                            }
+                            
+                        },
+                        
+                        {
+                            "title": "Acciones",
+                            "data": "id",
+                            className: "table_align_center",
+                            render: function(data, type, row, meta ) {
+                                // href="/vehiculos/'+data+'/edit"
+                                return '<div class="btn-group"><a class="btn btn-info" href="/regpasajeros/'+data+'/liquidar" data-bs-toggle="mensaje" title="Liquidar"><i class="fas fa-comment-dollar"></i></a></div>';
+                            }
                         }
-                        
-                       
-                        
-                        // {
-                        //     "title": "Acciones",
-                        //     "data": "id",
-                        //     className: "table_align_center",
-                        //     render: function(data, type, row, meta ) {
-                        //         return '<div class="btn-group"><a class="btn btn-success btn-sm" href="/regpasajeros/'+data+'" style="margin-right: 6px;" disabled><i class="fa fa-eye"></i></a><a class="btn btn-info btn-sm" href="/regpasajeros/'+data+'/edit" disabled><i class="fas fa-pencil-alt"></i></a></div>';
-                        //     }
-                        // }
                     ]
 
             });

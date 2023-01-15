@@ -95,9 +95,9 @@
                     </a>
                 </li>
                   <li>
-                    <a class="nav-link" href="/regpasajeros">
+                   <!--  <a class="nav-link" href="/regpasajeros">
                         <i class="fas fa-dollar-sign"></i><span class="caret">Recaudo</span>
-                    </a>
+                    </a> -->
               <!--   </li>
                   <li>
                     <a class="nav-link" href="#">
@@ -108,8 +108,27 @@
         </li>
     
 
-    <?php endif ?>  
-    
+     <?php elseif (Auth::user()->hasAnyRole('Recaudo')): ?>
+
+     <li class="menu-header">Liquidacion Vehiculos</li>
+
+        <li class="dropdown"> 
+            <a href="#" class="nav-link has-dropdown">
+                <i class="fab fa-cc-amazon-pay"></i>
+                <span>Liquidacion</span>
+            </a>
+            <ul class="dropdown-menu" style="display: none;">
+                <li>
+                    <a class="nav-link" href="/regpasajeros">
+                        <i class="fas fa-dollar-sign"></i><span class="caret">Recaudo</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    <?php endif ?> 
+
+
 
 
 

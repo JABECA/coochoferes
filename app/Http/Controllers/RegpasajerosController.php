@@ -75,9 +75,9 @@ class RegpasajerosController extends Controller
             }
             
             // $numerosInternos = Numerosinternos::All(); 
-
-            $regpasajeros = Regpasajeros::where('estado', 1)->where('usr_crea', $userName)->orderBy('id', 'desc')->get(); 
-             // dd($regpasajeros); die();
+            $regpasajeros = Regpasajeros::where('estado', 1)->orderBy('id', 'desc')->get(); 
+            // $regpasajeros = Regpasajeros::where('usr_crea', $userName)->orderBy('id', 'desc')->get(); 
+            // dd($regpasajeros); die();
             // $vehiculos = [];
             return DataTables::of($regpasajeros)
                     ->addColumn('actions', 'regpasajeros.actions')
@@ -94,14 +94,28 @@ class RegpasajerosController extends Controller
          // //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $blogs->links() !!}    
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
+        if ($request->ajax()) {
+
+            $userName = \Illuminate\Support\Facades\Auth::user()->name;
+            
+        
+            $regpasajeros = Regpasajeros::where('estado', 1)->where('usr_crea', $userName)->orderBy('id', 'desc')->get(); 
+
+            return DataTables::of($regpasajeros)
+                    ->addColumn('actions', 'regpasajeros.actions')
+                    ->rawColumns(['actions'])
+                    ->make(true);
+            
+        }
 
         $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
        
@@ -134,7 +148,8 @@ class RegpasajerosController extends Controller
         if ($request->ruta == 'Virginia') {
             $tarifa = 2000;
         }else if($request->ruta == 'Cartago'){
-            $tarifa = 3000;
+            $tarifa = 2000;
+            $tarifa2 = 5500;
         }else if($request->ruta == 'Armenia'){
             $tarifa = 7000;
         }else{
@@ -146,14 +161,21 @@ class RegpasajerosController extends Controller
         $regpasajero->cant_pasajeros_terminal  = $request->cant_pasajeros_terminal;
         $regpasajero->ruta                     = $request->ruta;
         $regpasajero->fecha_registro           = $request->fecha_registro  ;
+        $regpasajero->hora_registro            = $request->hora_registro  ;
         $regpasajero->valor_pasaje             = $tarifa;
-        $regpasajero->total_cuadre             = $request->cant_pasajeros*$tarifa;
-        $regpasajero->usr_crea                 = $request->usr_crea        ;
-        $regpasajero->observaciones            = $request->observaciones        ;
+
+        if ($request->ruta == 'Cartago') {
+            $regpasajero->total_cuadre = ($request->cant_pasajeros*$tarifa)+($regpasajero->cant_pasajeros_terminal*$tarifa2);
+        }else{
+            $regpasajero->total_cuadre             = $request->cant_pasajeros*$tarifa;
+        }
+        
+        $regpasajero->usr_crea                 = $request->usr_crea;
+        $regpasajero->observaciones            = $request->observaciones;
    
         $regpasajero->save();
 
-        return redirect()->route('regpasajeros.index');
+        return redirect()->route('regpasajeros.create');
     }
 
     /**
@@ -178,6 +200,14 @@ class RegpasajerosController extends Controller
         //
     }
 
+    public function liquidar(Regpasajeros $regpasajero)
+    {
+        //
+        // dd($regpasajero); die();
+
+        return view('regpasajeros.liquidar', compact('regpasajero'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -188,6 +218,25 @@ class RegpasajerosController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function updateLiquidacion(Request $request, Regpasajeros $regpasajero)
+    {
+        //
+        $regpasajero->update($request->all());
+        // dd($regpasajero); die();
+
+        // $regpasajero->$id = $request->id;
+        // $regpasajero->$num_interno = $request->num_interno; 
+        // $regpasajero->$cod_recaudo = $request->cod_recaudo;
+        // $regpasajero->$usr_recaudo = $request->usr_recaudo;
+        // $regpasajero->$fecha_recaudo = $request->fecha_recaudo;
+
+        // // dd($id, $num_interno, $cod_recaudo, $usr_recaudo, $fecha_recaudo); die();
+
+
+        // $regpasajero->save();
+        return redirect()->route('regpasajeros.index');
     }
 
     /**
