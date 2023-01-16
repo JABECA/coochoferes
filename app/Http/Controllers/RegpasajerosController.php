@@ -33,19 +33,6 @@ class RegpasajerosController extends Controller
             $fecfin      = $request->get('fecha_fin');
             $num_interno = $request->get('num_interno');
             $userName = \Illuminate\Support\Facades\Auth::user()->name;
-            
-
-            // if (  ( $request->has('num_interno') && !empty($request->get('num_interno') ) ) ) {
-            //         $estado    = $request->get('status_id');
-            //         $estado = $request->get('status_id') == '' ? $estado = 1 : $estado = $estado;
-                    
-            //         $regpasajeros = Regpasajeros::All()->where('estado', $estado)->where('num_interno', $num_interno);
-            //         return DataTables::of($regpasajeros)
-            //                 ->addColumn('actions', 'regpasajeros.actions')
-            //                 ->rawColumns(['actions'])
-            //                 ->make(true);
-                   
-            // }
 
             if (  
                   ( $request->has('fecha_ini') && !empty($request->get('fecha_ini')) ) &&
@@ -58,10 +45,9 @@ class RegpasajerosController extends Controller
                     $fecFin       = $request->get('fecha_fin');
                     $num_interno  = $request->get('num_interno');
                     
-                   
-                        $condicion1 = '"'.$documento.'", ["'.$fecIni.'", "'.$fecFin.'"]';
+                    $condicion1 = '"'.$documento.'", ["'.$fecIni.'", "'.$fecFin.'"]';
                 
-                      // echo $condicion1 ; die();  //whereBetween("fec_venc_SOAT", ["2022-12-26 ", "2022-12-31"])
+                    // echo $condicion1 ; die();  //whereBetween("fec_venc_SOAT", ["2022-12-26 ", "2022-12-31"])
 
                     $regpasajeros = Regpasajeros::whereBetween($documento, [$fecini, $fecfin] )
                                             ->where('num_interno' , $num_interno)
@@ -76,7 +62,7 @@ class RegpasajerosController extends Controller
             
             // $numerosInternos = Numerosinternos::All(); 
             $regpasajeros = Regpasajeros::where('estado', 1)->orderBy('id', 'desc')->get(); 
-            // $regpasajeros = Regpasajeros::where('usr_crea', $userName)->orderBy('id', 'desc')->get(); 
+            // $regpasajeros = Regpasajeros::where('usr_crea', $userName)where('estado', 1)->->orderBy('id', 'desc')->get(); 
             // dd($regpasajeros); die();
             // $vehiculos = [];
             return DataTables::of($regpasajeros)
@@ -89,6 +75,62 @@ class RegpasajerosController extends Controller
         $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
        
         return view('regpasajeros.index', compact('Numerosinternos'));
+         // $vehiculos = Vehiculos::All();
+         // return view('vehiculos.index',compact('vehiculos'));
+         // //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $blogs->links() !!}    
+    }
+
+    public function admrecaudo(Request $request) {
+
+       // dd('hola entre'); die();
+        if ($request->ajax()) {
+
+            $fecini      = $request->get('fecha_ini');
+            $fecfin      = $request->get('fecha_fin');
+            $num_interno = $request->get('num_interno');
+            $userName = \Illuminate\Support\Facades\Auth::user()->name;
+
+            if (  
+                  ( $request->has('fecha_ini') && !empty($request->get('fecha_ini')) ) &&
+                  ( $request->has('fecha_fin')  && !empty($request->get('fecha_fin')) ) &&
+                  ( $request->has('num_interno')  && !empty($request->get('num_interno')) )
+               ) {
+                   
+                    $documento    = 'fecha_registro';                   
+                    $fecIni       = $request->get('fecha_ini');
+                    $fecFin       = $request->get('fecha_fin');
+                    $num_interno  = $request->get('num_interno');
+                    
+                    $condicion1 = '"'.$documento.'", ["'.$fecIni.'", "'.$fecFin.'"]';
+                
+                    // echo $condicion1 ; die();  //whereBetween("fec_venc_SOAT", ["2022-12-26 ", "2022-12-31"])
+
+                    $regpasajeros = Regpasajeros::whereBetween($documento, [$fecini, $fecfin] )
+                                            ->where('num_interno' , $num_interno)
+                                            ->get();
+                    
+                    return DataTables::of($regpasajeros)
+                            ->addColumn('actions', 'regpasajeros.actions')
+                            ->rawColumns(['actions'])
+                            ->make(true);
+                   
+            }
+            
+            // $numerosInternos = Numerosinternos::All(); 
+            $regpasajeros = Regpasajeros::orderBy('id', 'desc')->get(); 
+            // $regpasajeros = Regpasajeros::where('usr_crea', $userName)->orderBy('id', 'desc')->get(); 
+            // dd($regpasajeros); die();
+            // $vehiculos = [];
+            return DataTables::of($regpasajeros)
+                    ->addColumn('actions', 'regpasajeros.actions')
+                    ->rawColumns(['actions'])
+                    ->make(true);
+            
+        }
+
+        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+       
+        return view('regpasajeros.admrecaudo', compact('Numerosinternos'));
          // $vehiculos = Vehiculos::All();
          // return view('vehiculos.index',compact('vehiculos'));
          // //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $blogs->links() !!}    
@@ -160,8 +202,8 @@ class RegpasajerosController extends Controller
         $regpasajero->cant_pasajeros           = $request->cant_pasajeros;
         $regpasajero->cant_pasajeros_terminal  = $request->cant_pasajeros_terminal;
         $regpasajero->ruta                     = $request->ruta;
-        $regpasajero->fecha_registro           = $request->fecha_registro  ;
-        $regpasajero->hora_registro            = $request->hora_registro  ;
+        $regpasajero->fecha_registro           = $request->fecha_registro;
+        $regpasajero->hora_registro            = $request->hora_registro;
         $regpasajero->valor_pasaje             = $tarifa;
 
         if ($request->ruta == 'Cartago') {

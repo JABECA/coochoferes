@@ -72,7 +72,7 @@
                     </a>
                 </li>
                   <li>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/admrecaudos">
                         <i class="far fa-edit"></i><span class="caret">Admin recaudos</span>
                     </a>
                 </li>

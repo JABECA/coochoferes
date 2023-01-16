@@ -122,22 +122,23 @@
                 // order: [[1, 'DESC']],
                 pageLength: 10,
                 dom: 'lBfrtip',
-                buttons: [{
-                        extend: 'copy',
-                        className: 'btn-light',
-                        text: 'Copiar',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        className: 'btn-light',
-                        text: 'CSV',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
+                buttons: [
+                    // {
+                    //     extend: 'copy',
+                    //     className: 'btn-light',
+                    //     text: 'Copiar',
+                    //     exportOptions: {
+                    //         columns: ':visible'
+                    //     }
+                    // },
+                    // {
+                    //     extend: 'csv',
+                    //     className: 'btn-light',
+                    //     text: 'CSV',
+                    //     exportOptions: {
+                    //         columns: ':visible'
+                    //     }
+                    // },
                     {
                         extend: 'excel',
                         className: 'btn-light',

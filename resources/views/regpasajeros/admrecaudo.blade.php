@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Reg_Pasajeros
+    ADM recaudos
 @endsection
 
 @section('css')
@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Recaudo de vehiculos</h3>
+            <h3 class="page__heading">Administrar Recaudos</h3>
         </div>
         <?php 
             $fecha_actual = date("d-m-Y");
@@ -48,6 +48,7 @@
                                                       
                         </div>
 
+        
                             <!-- <div class="table-responsive"> -->
                                 <table  class="table table-striped table-bordered shadow-lg mt-4  regpasajeros" style="width:100%;">
                                     <thead class="tabla-header-bg">
@@ -59,6 +60,9 @@
                                         <th >Total cuadre</th>
                                         <th >Fecha Ruta</th>
                                         <th >Fecha/Hora Liquidacion</th>
+                                        <th >Usr Liquida</th> <!--  -->
+                                        <th >Fecha/hora Recaudo</th> <!--  -->
+                                        <th >Usr recaudo</th>  <!--  -->
                                         <th >Codigo recaudo</th>
                                         <th >Estado</th>
                                         <th style="color:#fff;">Acciones</th>
@@ -165,7 +169,7 @@
                     serverSide: true,
                     responsive: true,
                     ajax: {
-                        url: "{{route('regpasajeros.index')}}",
+                        url: "{{route('admrecaudos.admrecaudo')}}",
                         data: function(d) {
                             d.num_interno  = $('.num_interno').val(),
                             d.fecha_ini = $('.fecha_ini').val(),
@@ -231,6 +235,21 @@
                             data: 'hora_registro',
                             name: 'Fecha/Hora liquidacion'
                         },
+
+                        {
+                            data: 'usr_crea',
+                            name: 'Usr liquida'
+                        },
+
+                        {
+                            data: 'fecha_recaudo',
+                            name: 'Fecha/Hora recaudo'
+                        },
+
+                        {
+                            data: 'usr_recaudo',
+                            name: 'Usr recaduo'
+                        },
                         {
                             data: 'cod_recaudo',
                             name: 'Recibo de pago',
@@ -240,7 +259,7 @@
                         },
 
                         {   
-                            "title": "Estado",
+                            "title": "Estado/Cod recaudo",
                             "data": "cod_recaudo",
                             render: function(data, type, row, meta ) {
                                 if(row.cod_recaudo == null){
@@ -257,7 +276,7 @@
                             className: "table_align_center",
                             render: function(data, type, row, meta ) {
                                 // href="/vehiculos/'+data+'/edit"
-                                return '<div class="btn-group"><a class="btn btn-info" href="/regpasajeros/'+data+'/liquidar" data-bs-toggle="mensaje" title="Liquidar"><i class="fas fa-comment-dollar"></i></a></div>';
+                                return '<div class="btn-group"><a class="btn btn-success btn-sm" href="/regpasajeros/'+data+'" style="margin-right: 6px;"><i class="fa fa-eye"></i></a><a class="btn btn-info btn-sm" href="/regpasajeros/'+data+'/edit"><i class="fas fa-pencil-alt"></i></a></div>';
                             }
                         }
                     ]

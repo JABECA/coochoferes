@@ -71,12 +71,14 @@ Route::get('/exams/{id}',  [App\Http\Controllers\ExamController::class, 'show'] 
 // Route::get('/insidentes/{insidente}/{estado}',  [App\Http\Controllers\InsidenteController::class, 'updateEstado'] )->name('insidentes.estado');
 Route::get('/insidentes/{id}',  [App\Http\Controllers\InsidenteController::class, 'show'] )->name('insidentes.insidentes');
 
+//insidentes
 Route::get('/insidentes/{insidente}/duracion',  [App\Http\Controllers\InsidenteController::class, 'duracion'] )->name('insidentes.duracion');
 Route::put('/insidentes/{insidente}',  [App\Http\Controllers\InsidenteController::class, 'actualizar'] )->name('insidentes.actualizar');
 Route::get('/insidentes/placas',  [App\Http\Controllers\InsidenteController::class, 'getPlaca'] )->name('insidentes.placas');
 
-
-Route::get('/regpasajeros/{regpasajero}/liquidar',  [App\Http\Controllers\RegpasajerosController::class, 'liquidar'] )->name('regpasajeros.liquidar');
-Route::put('/regpasajeros/{regpasajero}',  [App\Http\Controllers\RegpasajerosController::class, 'updateLiquidacion'] )->name('regpasajeros.ubdateLiquidacion');
+//registro de pasajeros
+Route::get('/admrecaudos',                          [App\Http\Controllers\RegpasajerosController::class, 'admrecaudo'       ])->name('admrecaudos.admrecaudo');
+Route::get('/regpasajeros/{regpasajero}/liquidar',  [App\Http\Controllers\RegpasajerosController::class, 'liquidar'         ])->name('regpasajeros.liquidar');
+Route::put('/regpasajeros/{regpasajero}',           [App\Http\Controllers\RegpasajerosController::class, 'updateLiquidacion'])->name('regpasajeros.ubdateLiquidacion');
 
 
