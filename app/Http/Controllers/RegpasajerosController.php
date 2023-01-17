@@ -183,6 +183,7 @@ class RegpasajerosController extends Controller
                 'cant_pasajeros'          => 'required',
                 'cant_pasajeros_terminal' => 'required|max:19',
                 'ruta'                    => 'required',
+                'nombre_conductor'        => 'required|min:3|max:50|regex:/^[A-Za-z ]+$/i',
             ],
            
         );
@@ -199,6 +200,7 @@ class RegpasajerosController extends Controller
         }
 
         $regpasajero->num_interno              = $request->num_interno;
+        $regpasajero->nombre_conductor         = $request->nombre_conductor;
         $regpasajero->cant_pasajeros           = $request->cant_pasajeros;
         $regpasajero->cant_pasajeros_terminal  = $request->cant_pasajeros_terminal;
         $regpasajero->ruta                     = $request->ruta;

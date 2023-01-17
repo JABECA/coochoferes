@@ -65,6 +65,14 @@
 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
+                                    <label for="">Nombre conductor:</label>
+                                    <input  class="form-control" type="text"  name="nombre_conductor" id="nombre_conductor">
+                                    <!-- {!! Form::number('cant_pasajeros_terminal', null, array('class' => 'form-control')) !!} -->
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3 col-md-3">
+                                <div class="form-group">
                                     <label for="">Cantidad Pasajeros Terminal:</label>
                                     <input  class="form-control" type="number"  max="19" name="cant_pasajeros_terminal" id="cant_pasajeros_terminal">
                                     <!-- {!! Form::number('cant_pasajeros_terminal', null, array('class' => 'form-control')) !!} -->
@@ -136,6 +144,7 @@
                                 <thead class="tabla-header-bg">
                                     <th style="display: none;">ID</th>                                                       
                                     <th ># Interno</th>
+                                    <th >Conductor</th>
                                     <th >Cantidad Pasajeros Terminal</th>
                                     <th >Cantidad Pasajeros Ruta</th>
                                     <th >Ruta</th>
@@ -237,6 +246,13 @@
                         {
                             data: 'num_interno',
                             name: '# interno',
+                            searchable: true,
+                            orderable: true,
+                            className: "text-center"
+                        },
+                        {
+                            data: 'nombre_conductor',
+                            name: 'Conductor',
                             searchable: true,
                             orderable: true,
                             className: "text-center"

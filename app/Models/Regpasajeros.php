@@ -9,7 +9,8 @@ class Regpasajeros extends Model
 {
     use HasFactory;
     protected $fillable = [
-                           'num_interno', 
+                           'num_interno',
+                           'nombre_conductor', 
                            'cant_pasajeros',
                            'cant_pasajeros_terminal',
                            'ruta',

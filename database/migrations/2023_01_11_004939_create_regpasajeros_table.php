@@ -16,6 +16,7 @@ class CreateRegpasajerosTable extends Migration
         Schema::create('regpasajeros', function (Blueprint $table) {
             $table->id();
             $table->integer('num_interno');
+            $table->string('nombre_conductor')->nullable();
             $table->integer('cant_pasajeros');
             $table->integer('cant_pasajeros_terminal')->nullable();
             $table->string('ruta')->nullable();
