@@ -4,7 +4,14 @@
 @endsection
 
 @section('css')
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/r-2.4.0/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.5.0/css/select.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.2.0/css/dataTables.dateTime.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.2.0/css/dataTables.dateTime.min.css"/>
+    
+   
 @endsection
 @section('content')
     <section class="section">
@@ -27,7 +34,18 @@
                           
                             <div class="col-md-2">
                                 <label>Numero Interno:</label>
-                                {!! Form::select('num_interno', $Numerosinternos, NULL, ['class' => 'select2 form-control num_interno']  ) !!}
+                                <select class="select2 form-control num_interno" name="num_interno" id="num_interno">
+                                        <option value="" selected>Seleccione un vehiculo: </option>
+                                        <?php 
+                                        foreach ($Numerosinternos as $key => $value) {
+                                            echo "<option value='".$value."'> ".$value."<option/>";
+                                        }
+
+                                        ?>
+
+                                </select>                                    
+                                    
+                                <!-- {!! Form::select('num_interno', $Numerosinternos, NULL, ['class' => 'select2 form-control num_interno']  ) !!} -->
                             </div>
                            
                            <div class="col-md-3">
@@ -91,6 +109,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/r-2.4.0/datatables.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js"></script>
+    <script type="text/javascript" src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 
 
     @if(session('eliminar') == 'ok')
@@ -158,7 +181,28 @@
             });
         });
 
+        var editor;
         $(document).ready(function () {
+
+            // editor = new $.fn.dataTable.editor( {
+            //     ajax: "../php/staff.php",
+            //     table: ".regpasajeros",
+            //     fields: [ {
+            //             label: "Numero Interno:",
+            //             name: "num_interno"
+            //         }, {
+            //             label: "Pasajeros ruta:",
+            //             name: "cant_pasajeros"
+            //         }, {
+            //             label: "Pasajeros Terminal:",
+            //             name: "cant_pasajeros_terminal"
+            //         }
+            //     ]
+            // } );
+
+            // $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
+            //     editor.inline( this );
+            // } );
 
             $(".num_interno").select2();
             $(".fecha_ini").flatpickr();
@@ -198,7 +242,8 @@
                             data: 'num_interno',
                             name: '# interno',
                             searchable: true,
-                            orderable: true
+                            orderable: true,
+                            className: 'contenteditable'
                         },
                         {
                             data: 'nombre_conductor',
@@ -344,24 +389,24 @@
                                 columns: [
                                     {
                                         image: logo,
-                                        width: 130,
-                                        margin: [30]
+                                        width: 150,
+                                        margin: [30,0]  //[izquierda, arriba]
                                     },
                                     {
                                         alignment: 'center',
                                         italics: true,
-                                        text: 'SISTEMA DE GESTION DE CALIDAD                                                                                                                           PROCESO TRA-TRANSPORTE                                                                                                                                   PLANILLA DE MOVILIZACION DE PASAJEROS',
+                                        text: 'SISTEMA DE GESTION DE CALIDAD\nPROCESO TRA-TRANSPORTE\nPLANILLA DE MOVILIZACION DE PASAJEROS',
                                         fontSize: 12,
-                                        // margin: [10,0]
                                     },
                                    
                                     {
                                         alignment: 'center',
                                         fontSize: 12,
-                                        text: 'Codigo: SGC-FOR-TRA-032                                                                                                                                                  Version: 001                                                                                                                                        Fecha: 10/07/2019                                                                                                                                                             Página  '+page.toString()+' de '+pages.toString()
+                                        text: 'Codigo: SGC-FOR-TRA-032\nVersion: 001\nFecha: 10/07/2019\nPágina  '+page.toString()+' de '+pages.toString()
+
                                     }
                                 ],
-                                margin: 5
+                                margin: 10
                             }
                         });
                         // Create a footer object with 2 columns

@@ -115,6 +115,32 @@ class RegpasajerosController extends Controller
                             ->make(true);
                    
             }
+
+            if (  
+                  ( $request->has('fecha_ini') && !empty($request->get('fecha_ini')) ) &&
+                  ( $request->has('fecha_fin')  && !empty($request->get('fecha_fin')) ) 
+                  
+               ) {
+                   
+                    $documento    = 'fecha_registro';                   
+                    $fecIni       = $request->get('fecha_ini');
+                    $fecFin       = $request->get('fecha_fin');
+                  
+                    
+                    $condicion1 = '"'.$documento.'", ["'.$fecIni.'", "'.$fecFin.'"]';
+                
+                    // echo $condicion1 ; die();  //whereBetween("fec_venc_SOAT", ["2022-12-26 ", "2022-12-31"])
+
+                    $regpasajeros = Regpasajeros::whereBetween($documento, [$fecini, $fecfin] )
+                                            ->orderBy('id', 'desc')
+                                            ->get();
+                    
+                    return DataTables::of($regpasajeros)
+                            ->addColumn('actions', 'regpasajeros.actions')
+                            ->rawColumns(['actions'])
+                            ->make(true);
+                   
+            }
             
             // $numerosInternos = Numerosinternos::All(); 
             $regpasajeros = Regpasajeros::orderBy('id', 'desc')->get(); 
@@ -239,9 +265,11 @@ class RegpasajerosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Regpasajeros $regpasajero)
     {
         //
+        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+        return view('regpasajeros.editar', compact('regpasajero', 'Numerosinternos'));
     }
 
     public function liquidar(Regpasajeros $regpasajero)
@@ -259,9 +287,18 @@ class RegpasajerosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Regpasajeros $regpasajero)
     {
-        //
+      
+         request()->validate([
+            'num_interno' => 'required',
+            'cant_pasajeros_terminal' => 'required',
+            'cant_pasajeros' => 'required',
+        ]);
+
+       
+        $regpasajero->update($request->all());
+        return redirect()->route('admrecaudos.admrecaudo');
     }
 
     public function updateLiquidacion(Request $request, Regpasajeros $regpasajero)

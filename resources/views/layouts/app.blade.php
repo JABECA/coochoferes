@@ -14,6 +14,8 @@
     <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
 
+    <link href="{{ asset('assets/css/editor.dataTables.min.css') }}" rel="stylesheet" type="text/css"/>
+
     <!-- flat picker para campos date -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
@@ -59,6 +61,7 @@
 <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
+<script src="{{ asset('assets/js/dataTables.editor.min.js') }}"></script>
 
 
 <!-- Template JS File -->

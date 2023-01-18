@@ -80,5 +80,6 @@ Route::get('/insidentes/placas',  [App\Http\Controllers\InsidenteController::cla
 Route::get('/admrecaudos',                          [App\Http\Controllers\RegpasajerosController::class, 'admrecaudo'       ])->name('admrecaudos.admrecaudo');
 Route::get('/regpasajeros/{regpasajero}/liquidar',  [App\Http\Controllers\RegpasajerosController::class, 'liquidar'         ])->name('regpasajeros.liquidar');
 Route::put('/regpasajeros/{regpasajero}',           [App\Http\Controllers\RegpasajerosController::class, 'updateLiquidacion'])->name('regpasajeros.ubdateLiquidacion');
+Route::put('/regpasajeros/actualizar/{regpasajero}',           [App\Http\Controllers\RegpasajerosController::class, 'update'])->name('regpasajeros.updateLiquidacion');
 
 
