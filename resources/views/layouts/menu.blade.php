@@ -63,7 +63,7 @@
             <ul class="dropdown-menu" style="display: none;">
                 <li>
                     <a class="nav-link" href="/regpasajeros/create">
-                        <i class="fas fa-users"></i><span class="caret">Operativo</span>
+                        <i class="fas fa-users"></i><span class="caret">Monitoreo</span>
                     </a>
                 </li>
                   <li>

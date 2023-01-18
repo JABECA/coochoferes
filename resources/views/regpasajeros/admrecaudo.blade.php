@@ -79,9 +79,9 @@
                                         <th >Total cuadre</th>
                                         <th >Fecha Ruta</th>
                                         <th >Fecha/Hora Liquidacion</th>
-                                        <th >Usr Liquida</th> <!--  -->
+                                        <th >Usuario que Liquida</th> <!--  -->
                                         <th >Fecha/hora Recaudo</th> <!--  -->
-                                        <th >Usr recaudo</th>  <!--  -->
+                                        <th >Usuario que recaudo</th>  <!--  -->
                                         <th >Codigo recaudo</th>
                                         <th >Estado/Cod recaudo</th>
                                         <th style="color:#fff;">Acciones</th>
@@ -222,7 +222,7 @@
                             d.fecha_fin  = $('.fecha_fin').val()
                         },
                     },
-                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Toditos"]],
+                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
                       "iDisplayLength": 10,
                       "aaSorting": [[1, 'desc']],
                     dataType: 'json',
@@ -329,7 +329,7 @@
                             className: "table_align_center",
                             render: function(data, type, row, meta ) {
                                 // href="/vehiculos/'+data+'/edit"
-                                return '<div class="btn-group"><a class="btn btn-success btn-sm" href="/regpasajeros/'+data+'" style="margin-right: 6px;"><i class="fa fa-eye"></i></a><a class="btn btn-info btn-sm" href="/regpasajeros/'+data+'/edit"><i class="fas fa-pencil-alt"></i></a></div>';
+                                return '<div class="btn-group"><a class="btn btn-info btn-sm" href="/regpasajeros/'+data+'/edit"><i class="fas fa-pencil-alt"></i></a></div>';
                             }
                         }
                     ],
