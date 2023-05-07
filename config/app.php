@@ -179,7 +179,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
 
         //datatables server side
-        Yajra\DataTables\DataTablesServiceProvider::class
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        // Elibyy\TCPDF\ServiceProvider::class,
     ],
 
     /*
@@ -234,6 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        // 'TCPDF' => Elibyy\TCPDF\Facades\TCPDF::class
 
     ],
 

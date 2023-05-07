@@ -5,7 +5,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Crear Vehiculo</h3>
+            <h3 class="page__heading">Crear Vehículo</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Numero Interno:</label>                                    
+                                    <label for="">N&uacutemero Interno:</label>                                    
                                     {!! Form::text('num_interno', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
@@ -69,13 +69,13 @@
                             </div> 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="img_laterald">Imagen lateral derecha:</label>
+                                    <label for="img_laterald">Imagen Lateral Derecha:</label>
                                     {!! Form::file('img_laterald', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div> 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="img_laterali">Imagen lateral Izquierda:</label>
+                                    <label for="img_laterali">Imagen Lateral Izquierda:</label>
                                     {!! Form::file('img_laterali', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div> 
@@ -115,43 +115,43 @@
                             </div>
                              <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Numero del SOAT:</label>
+                                    <label for="">N&uacutemero del SOAT:</label>
                                     {!! Form::text('num_SOAT', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                              <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Fecha vencimiento del SOAT:</label>
+                                    <label for="">Fecha Vencimiento del SOAT:</label>
                                     {!! Form::date('fec_venc_SOAT', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                              <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Numero de la RTM:</label>
+                                    <label for="">N&uacutemero de la RTM:</label>
                                     {!! Form::text('num_RTM', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                              <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Fecha vencimiento de la RTM:</label>
+                                    <label for="">Fecha Vencimiento de la RTM:</label>
                                     {!! Form::date('fec_venc_RTM', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                              <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Numero de la TOP:</label>
+                                    <label for="">N&uacutemero de la TOP:</label>
                                     {!! Form::text('num_TOP', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Ciudad tarjeta de operacion:</label><br> 
+                                    <label for="">Ciudad Tarjeta de Operaci&oacuten:</label><br> 
                                     {!! Form::select('ciudad_TOP', $ciudades, NULL, ['class' => 'select2 form-control']  ) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Fecha vencimiento tarjeta de operacion:</label>
+                                    <label for="">Fecha Vencimiento Tarjeta de Operaci&oacuten:</label>
                                     {!! Form::date('fec_venc_TOP', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>

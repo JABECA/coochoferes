@@ -31,6 +31,12 @@
                                     {!! Form::text('name', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
+                             <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="identificacion">Identificación/Cédula</label>
+                                    {!! Form::number('identificacion', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="email">E-mail</label>

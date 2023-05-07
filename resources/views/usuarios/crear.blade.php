@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Alta de Usuarios</h3>
+            <h3 class="page__heading">Crear de Usuario</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -30,6 +30,12 @@
                                 <div class="form-group">
                                     <label for="name">Nombre</label>
                                     {!! Form::text('name', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="identificacion">Identificación/Cédula</label>
+                                    {!! Form::number('identificacion', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">

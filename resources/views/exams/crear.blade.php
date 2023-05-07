@@ -5,7 +5,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Crear Examen o Induccion</h3>
+            <h3 class="page__heading">Crear Examen o Inducción</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -56,7 +56,9 @@
                                                               'Examen_teorico_practico' => 'Examen Teorico Practico',
                                                               'Examen de Ingreso'       => 'Examen de Ingreso',
                                                               'Vacaciones Pagadas'      => 'Vacaciones Pagadas',
-                                                              'Vacaciones Pendientes'   => 'Vacaciones Pendientes'
+                                                              'Vacaciones Pendientes'   => 'Vacaciones Pendientes',
+                                                              'Retiro'                  => 'Retiro',
+                                                              'Reingreso'               => 'Reingreso'
 
                                                              ] , 
                                                               NULL, 
@@ -67,21 +69,21 @@
 
                              <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Descripcion:</label>
+                                    <label for="">Descripci&oacuten:</label>
                                     {!! Form::textarea('descripcion', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div> 
 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="fecha_ini">Fehca desde:</label>
+                                    <label for="fecha_ini">Fecha Desde:</label>
                                     {!! Form::date('fecha_ini', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="fecha_fin">Fehca hasta:</label>
+                                    <label for="fecha_fin">Fecha Hasta:</label>
                                     {!! Form::date('fecha_fin', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>

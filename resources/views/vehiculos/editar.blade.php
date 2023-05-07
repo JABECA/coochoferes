@@ -5,7 +5,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Editar Vehiculo</h3>
+            <h3 class="page__heading">Editar Veh&iacuteculo</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                           <label for="num_interno">Numero interno:</label>
+                                           <label for="num_interno">N&uacutemero Interno:</label>
                                            <input type="text" name="num_interno" class="form-control" value="{{ $vehiculo->num_interno }}">
                                         </div>
                                     </div>
@@ -78,7 +78,7 @@
                                     </div> 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="img_laterald">Imagen lateral derecha:</label>
+                                            <label for="img_laterald">Imagen Lateral Derecha:</label>
                                             <input class="form-control" value="{{ $vehiculo->img_laterald }}">
                                              <input class="form-control" type="file" name="img_laterald" id="img_laterald" value="{{ $vehiculo->img_laterald }}">
                                             <!-- {!! Form::file('img_laterald', null, array('class' => 'form-control')) !!} -->
@@ -86,7 +86,7 @@
                                     </div> 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="img_laterali">Imagen lateral Izquierda:</label>
+                                            <label for="img_laterali">Imagen Lateral Izquierda:</label>
                                             <input class="form-control" value="{{ $vehiculo->img_laterali }}">
                                             <input class="form-control" type="file" name="img_laterali" id="img_laterali" value="{{ $vehiculo->img_laterali }}">
                                             <!-- {!! Form::file('img_laterali', null, array('class' => 'form-control')) !!} -->
@@ -125,49 +125,49 @@
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="tipo_combustible">Tipo de combustible</label>
+                                            <label for="tipo_combustible">Tipo de Combustible</label>
                                             <input class="form-control" type="text" name="tipo_combustible"  value="{{ $vehiculo->tipo_combustible }}">
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="num_SOAT">Numero del SOAT</label>
+                                            <label for="num_SOAT">N&uacutemero del SOAT</label>
                                             <input class="form-control" type="text" name="num_SOAT"  value="{{ $vehiculo->num_SOAT }}">
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="fec_venc_SOAT">Fecha de vencimiento del SOAT</label>
+                                            <label for="fec_venc_SOAT">Fecha de Vencimiento del SOAT</label>
                                             <input class="form-control" type="date" name="fec_venc_SOAT"  value="{{ $vehiculo->fec_venc_SOAT }}">
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="num_RTM">Numero de la RTM</label>
+                                            <label for="num_RTM">N&uacutemero de la RTM</label>
                                             <input class="form-control" type="text" name="num_RTM"  value="{{ $vehiculo->num_RTM }}">
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="fec_venc_RTM">Fecha de vencimiento de la RTM</label>
+                                            <label for="fec_venc_RTM">Fecha de Vencimiento de la RTM</label>
                                             <input class="form-control" type="date" name="fec_venc_RTM"  value="{{ $vehiculo->fec_venc_RTM }}">
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="num_TOP">Numero de la TOP</label>
+                                            <label for="num_TOP">N&uacutemero de la TOP</label>
                                             <input class="form-control" type="text" name="num_TOP"  value="{{ $vehiculo->num_TOP }}">
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="fec_venc_TOP">Fecha de vencimiento de la TOP</label>
+                                            <label for="fec_venc_TOP">Fecha de Vencimiento de la TOP</label>
                                             <input class="form-control" type="date" name="fec_venc_TOP"  value="{{ $vehiculo->fec_venc_TOP }}">
                                         </div>
                                     </div>
@@ -180,7 +180,7 @@
                                     </div> -->
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="">Ciudad tarjeta de operacion:</label><br> 
+                                            <label for="">Ciudad Tarjeta de Operaci&oacuten:</label><br> 
                                             {!! Form::select('ciudad_TOP', $ciudades, $vehiculo->ciudad_TOP, ['class' => 'select2 form-control']) !!}
                                         </div>
                                     </div>

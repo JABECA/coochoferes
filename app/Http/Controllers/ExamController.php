@@ -116,7 +116,7 @@ class ExamController extends Controller
         $id_conductor =  $exam->id_conductor;
 
         $driver = Exam::join("personas","personas.id","exams.id_conductor")
-                ->select("exams.id","personas.nombres","personas.apellidos","exams.tipo","exams.descripcion","exams.fecha","exams.vigencia","exams.usr_crea","exams.estado")
+                ->select("exams.id","personas.nombres","personas.apellidos","exams.tipo","exams.descripcion","exams.fecha_ini", "exams.fecha_ini","exams.vigencia","exams.usr_crea","exams.estado")
                 ->where('id_conductor', $id_conductor)
                 ->get();
         $driver = $driver[0]['nombres'].' '.$driver[0]['apellidos'];

@@ -5,7 +5,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Crear insidente a vehiculo</h3>
+            <h3 class="page__heading">Crear Incidente a Vehículo</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -32,19 +32,22 @@
 
                                 <div class="col-xs-12 col-sm-3 col-md-3">
                                     <div class="form-group">
-                                        <label for="num_interno">Numero Interno Vehiculo:</label> 
+                                        <label for="num_interno">N&uacutemero Interno Veh&iacuteculo:</label> 
                                         <select class="select2 form-control" id="num_interno" name="num_interno">
                                             <option value="1">Seleccione el numero Interno</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
+                                            <?php 
+                                            foreach ($numerosInternos as $key => $value) {
+                                                echo "<option value=".$value.">".$value."</option>";
+                                            }
+
+                                            ?>
                                         </select>
-                                        <!-- {!! Form::select('num_interno', $numerosInternos, NULL, ['class' => 'select2 form-control']  ) !!} -->
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-3 col-md-3">
                                     <div class="form-group">
-                                        <label for="">Placa Vehiculo:</label> 
+                                        <label for="">Placa Veh&iacuteculo:</label> 
                                         <select class="select2 form-control" id="placa" name="placa">
                                             
                                         </select>
@@ -81,7 +84,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-3 col-md-3">
                                     <div class="form-group">
-                                        <label for="">Descripcion:</label>
+                                        <label for="">Descripci&oacuten:</label>
                                         {!! Form::textarea('descripcion', null, array('class' => 'form-control')) !!}
                                     </div>
                                 </div> 
@@ -129,7 +132,6 @@
 
 
      });
-    
 </script>
 
 @endsection

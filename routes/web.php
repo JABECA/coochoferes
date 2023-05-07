@@ -11,6 +11,8 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\InsidenteController;
 use App\Http\Controllers\RegpasajerosController;
+use App\Http\Controllers\PlanillaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('exams', ExamController::class);
     Route::resource('insidentes', InsidenteController::class);
     Route::resource('regpasajeros', RegpasajerosController::class);
+    Route::resource('planillas', PlanillaController::class);
 });
 
 // Se colocan las rutas personalizadas de las rutas del controlador resource que la contiene, 
@@ -80,6 +83,12 @@ Route::get('/insidentes/placas',  [App\Http\Controllers\InsidenteController::cla
 Route::get('/admrecaudos',                          [App\Http\Controllers\RegpasajerosController::class, 'admrecaudo'       ])->name('admrecaudos.admrecaudo');
 Route::get('/regpasajeros/{regpasajero}/liquidar',  [App\Http\Controllers\RegpasajerosController::class, 'liquidar'         ])->name('regpasajeros.liquidar');
 Route::put('/regpasajeros/{regpasajero}',           [App\Http\Controllers\RegpasajerosController::class, 'updateLiquidacion'])->name('regpasajeros.ubdateLiquidacion');
-Route::put('/regpasajeros/actualizar/{regpasajero}',           [App\Http\Controllers\RegpasajerosController::class, 'update'])->name('regpasajeros.updateLiquidacion');
+Route::put('/regpasajeros/actualizar/{regpasajero}',[App\Http\Controllers\RegpasajerosController::class, 'update'           ])->name('regpasajeros.updateLiquidacion');
+Route::get('/recaudos',                             [App\Http\Controllers\RegpasajerosController::class, 'recaudos'         ])->name('recaudos.recaudos');
+Route::get('/regpasajeros/{regpasajero}/borrar',    [App\Http\Controllers\RegpasajerosController::class, 'borrar'           ])->name('regpasajeros.borrar');
+
+Route::get('/planillas/{planilla}/pdf',             [App\Http\Controllers\PlanillaController::class, 'pdf'                  ])->name('planillas.pdf');
+
+
 
 

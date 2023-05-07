@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Vehiculos</h3>
+            <h3 class="page__heading">Vehículos</h3>
         </div>
 
         <div class="section-body">
@@ -20,17 +20,17 @@
 
                         <div class="row mb-3">
                             <div class="col-md-2">
-                                <label>Fecha desde:</label>
+                                <label>Fecha Desde:</label>
                                 <input type="text" name="start_date" class="form-control start_date" readonly />
                             </div>
                             <div class="col-md-2">
-                                <label>Fecha hasta:</label>
+                                <label>Fecha Hasta:</label>
                                 <input type="text" name="end_date" class="form-control end_date" readonly />
                             </div>
                             <div class="col-md-2">
                                 <label>Documento:</label>
                                 <select class="form-control documento" name="documento">
-                                    <option value="">Seleccione el tipó</option>
+                                    <option value="">Seleccione el tipo</option>
                                     <option value="fec_venc_SOAT">SOAT</option>
                                     <option value="fec_venc_RTM">RTM</option>
                                     <option value="fec_venc_TOP">TOP</option>
@@ -39,7 +39,8 @@
                            
                             <div class="col-md-1">
                                 <label style="color: white;">Filtrar</label>
-                                <button class="form-control btn btn-info" id="filtrar">Filtrar</button>
+                                <!--<button class="form-control btn btn-info" id="filtrar">Filtrar</button>-->
+                                <button class="form-control btn btn-info" id="filtrar"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
 
@@ -54,13 +55,14 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label>Nmero interno: </label>
+                                <label>N&uacutemero Interno: </label>
                                 <input type="number" name="num_interno" class="form-control num_interno" />
                             </div>
                             
                             <div class="col-md-1">
                                 <label style="color: white;">Filtrar</label>
-                                <button class="form-control btn btn-info" id="filtrar2">Filtrar</button>
+                                <!--<button class="form-control btn btn-info" id="filtrar2">Filtrar</button>-->
+                                <button class="form-control btn btn-info" id="filtrar2"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
        
@@ -72,10 +74,10 @@
                                 <table  class="table table-striped table-bordered shadow-lg mt-4  vehiculos" style="width:100%;">
                                     <thead class="tabla-header-bg">
                                         <th style="display: none;">ID</th>                                                       
-                                        <th ># Interno</th>
-                                        <th >Placa</th>
+                                        <th style="color:#fff;"># Interno</th>
+                                        <th style="color:#fff;">Placa</th>
                                         <th style="color:#fff;">Estado</th>
-                                        <th style="color: red;">Chasis</th>
+                                        <th style="color:#fff;">Chasis</th>
                                         <th style="color:#fff;">Carroceria</th>
                                         <th style="color:#fff;">Modelo</th>
                                         <th style="color:#fff;">Marca</th>
@@ -214,7 +216,8 @@
                             data: 'id',
                             name: 'id',
                             searchable: true,
-                            orderable: true
+                            orderable: true,
+                            visible: false
 
                         },
                         {

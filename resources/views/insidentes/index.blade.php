@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Inscidencias en Vehiculos</h3>
+            <h3 class="page__heading">Incidencias en Vehículos</h3>
         </div>
                                                    
         <div class="section-body">
@@ -27,13 +27,13 @@
                                 <table id="insidentes" class="table table-striped table-bordered shadow-lg mt-4 dt-responsive" style="width:100%;">
                                     <thead class="tabla-header-bg">
                                         <th style="display: none;">ID</th>
-                                        <th>Num Interno</th>                                                       
-                                        <th >Placa</th>
-                                        <th >Tipo</th>
+                                        <th style="color:#fff;"># Interno</th>                                                       
+                                        <th style="color:#fff;">Placa</th>
+                                        <th style="color:#fff;">Tipo</th>
                                         <th style="color:#fff;">Fecha</th>
-                                        <th style="color: red;">Descripcion</th>
-                                        <th style="color:#fff;">Duracion</th>
-                                        <th style="color:#fff;">Solucion</th>
+                                        <th style="color:#fff;">Descripción</th>
+                                        <th style="color:#fff;">Duración</th>
+                                        <th style="color:#fff;">Solución</th>
                                         <th style="color:#fff;">Estado</th>
                                         <th style="color:#fff;">Acciones</th>
                                     </thead>  

@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Recaudo de vehiculos</h3>
+            <h3 class="page__heading">Recaudo de Veh&iacuteculos</h3>
         </div>
         <?php 
             $fecha_actual = date("d-m-Y");
@@ -26,10 +26,20 @@
                         <div class="row mb-3">
                           
                             <div class="col-md-2">
-                                <label>Numero Interno:</label>
-                                {!! Form::select('num_interno', $Numerosinternos, NULL, ['class' => 'select2 form-control num_interno']  ) !!}
+                                <label>N&uacutemero Interno:</label>
+                                <select class="select2 form-control num_interno" name="num_interno" id="num_interno">
+                                        <option value="" selected>Seleccione un Veh&iacuteculo: </option>
+                                        <?php 
+                                        foreach ($Numerosinternos as $key => $value) {
+                                            echo "<option value='".$value."'> ".$value."<option/>";
+                                        }
+
+                                        ?>
+                                </select> 
                             </div>
-                           
+
+                            
+                         <!--   
                            <div class="col-md-3">
                                 <label>Fecha ini: </label>
                                 <input type="date" name="fecha_registro" class="form-control fecha_ini" />
@@ -39,10 +49,15 @@
                                 <label>Fecha fin: </label>
                                 <input type="date" name="fecha_registro" class="form-control fecha_fin" />
                             </div>
-
+ -->
                             <div class="col-md-1">
                                     <label style="color: white;">Filtrar</label>
-                                    <button class="form-control btn btn-info" id="filtrar">Filtrar</button>
+                                    <button class="form-control btn btn-info" id="filtrar"><i class="fa fa-search"></i></button>
+                            </div>
+
+                             <div class="col-md-2">
+                                    <label style="color: white;">Filtrar</label>
+                                    <a  href="/recaudos" class="form-control btn btn-success" id="filtrar">Mis Recuados</a>
                             </div>
 
                                                       
@@ -52,15 +67,15 @@
                                 <table  class="table table-striped table-bordered shadow-lg mt-4  regpasajeros" style="width:100%;">
                                     <thead class="tabla-header-bg">
                                         <th style="display: none;">ID</th>                                                       
-                                        <th ># Interno</th>
-                                        <th >Cantidad Pasajeros Terminal</th>
-                                        <th >Cantidad Pasajeros Ruta</th>
-                                        <th >Ruta</th>
-                                        <th >Total cuadre</th>
-                                        <th >Fecha Ruta</th>
-                                        <th >Fecha/Hora Liquidacion</th>
-                                        <th >Codigo recaudo</th>
-                                        <th >Estado</th>
+                                        <th style="color:#fff;"># Interno</th>
+                                        <th style="color:#fff;">Pasajeros Terminal</th>
+                                        <th style="color:#fff;">Pasajeros Ruta</th>
+                                        <th style="color:#fff;">Ruta</th>
+                                        <th style="color:#fff;">Total Cuadre</th>
+                                        <th style="color:#fff;">Fecha Ruta</th>
+                                        <th style="color:#fff;">Fecha/Hora Monitoreo</th>
+                                        <th style="color:#fff;">Codigo Recaudo</th>
+                                        <th style="color:#fff;">Estado</th>
                                         <th style="color:#fff;">Acciones</th>
                                     </thead>  
                                     <tbody>
@@ -172,12 +187,12 @@
                             d.fecha_fin  = $('.fecha_fin').val()
                         },
                     },
-                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Toditos"]],
+                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
                       "iDisplayLength": 10,
-                      "aaSorting": [[1, 'desc']],
+                      "aaSorting": [[8, 'desc']],
                     dataType: 'json',
                     type: "POST",
-                    dom: 'lBfrtip',
+                    dom: 'lrtip',
                     columns: [
 
                         {
@@ -196,16 +211,16 @@
                         },
                         {
                             data: 'cant_pasajeros_terminal',
-                            name: 'Cantida de Pasajeros Terminal',
+                            name: 'Pasajeros Terminal',
                             searchable: true,
                             orderable: true
 
                         },
                         {
                             data: 'cant_pasajeros',
-                            name: 'Cantida de Pasajeros',
+                            name: 'Pasajeros Ruta',
                             searchable: true,
-                            orderable: true
+                            orderable: false
 
                         },
 
@@ -217,7 +232,7 @@
                         },
                         {
                             data: 'total_cuadre',
-                            name: 'Ruta',
+                            name: 'Total Cuadre',
                             searchable: false,
                             orderable: false
                         },
@@ -229,7 +244,8 @@
 
                         {
                             data: 'hora_registro',
-                            name: 'Fecha/Hora liquidacion'
+                            name: 'Fecha/Hora Monitoreo',
+                            orderable: true
                         },
                         {
                             data: 'cod_recaudo',

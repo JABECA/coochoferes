@@ -5,7 +5,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Incidencia Vehiculo</h3>
+            <h3 class="page__heading">Incidencia Veh&iacuteculo</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -40,7 +40,7 @@
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="tipo">Tipo de novedad :</label><br>
+                                            <label for="tipo">Tipo de Novedad :</label><br>
                                             <label>{{ $insidente->tipo }}</label>
                                             <!-- <input class="form-control" type="text" name="tipo"  value="{{ $insidente->tipo }}" readonly> -->
                                         </div>
@@ -48,7 +48,7 @@
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="descripcion">Descripcion de la novedad :</label><br>
+                                            <label for="descripcion">Descripci&oacuten de la Novedad :</label><br>
                                             <label>{{ $insidente->descripcion }}</label>
                                             <!-- <input class="form-control" type="text" name="descripcion"  value="{{ $insidente->descripcion }}" readonly> -->
                                         </div>
@@ -64,7 +64,7 @@
 
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
-                                            <label for="duracion">Duracion :</label><br>
+                                            <label for="duracion">Duraci&oacuten :</label><br>
                                             <label>{{ $insidente->duracion }}</label>
                                             <!-- <input class="form-control" type="text" name="duracion"  value="{{ $insidente->duracion }}" readonly> -->
                                         </div>

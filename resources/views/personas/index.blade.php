@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Propietarios i/o Conductores</h3>
+            <h3 class="page__heading">Propietarios y/o Conductores</h3>
         </div>
 
         <div class="section-body">
@@ -26,12 +26,12 @@
                                 <table id="vehiculos" class="table table-striped table-bordered shadow-lg mt-4 dt-responsive" style="width:100%;">
                                     <thead class="tabla-header-bg">
                                         <th style="display: none;">ID</th>                                                       
-                                        <th >Nombres</th>
-                                        <th >Apellidos</th>
-                                        <th style="color:#fff;">Identificacion</th>
-                                        <th style="color: red;">Celular</th>
-                                        <th style="color: red;">Propietario</th>
-                                        <th style="color: red;">Conductor</th>
+                                        <th style="color:#fff;">Nombres</th>
+                                        <th style="color:#fff;">Apellidos</th>
+                                        <th style="color:#fff;">Identificación</th>
+                                        <th style="color:#fff;">Celular</th>
+                                        <th style="color:#fff;">Propietario</th>
+                                        <th style="color:#fff;">Conductor</th>
                                         <th style="color:#fff;">Estado</th>
                                         <th style="color:#fff;">Inducciones</th>
                                         <th style="color:#fff;">Vacaciones</th>

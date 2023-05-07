@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Examenes e Inducciones conductor</h3>
+            <h3 class="page__heading">Examenes e Inducciones Conductor</h3>
         </div>
 
         <div class="section-body">
@@ -26,11 +26,11 @@
                                 <table id="examenes" class="table table-striped table-bordered shadow-lg mt-4 dt-responsive" style="width:100%;">
                                     <thead class="tabla-header-bg">
                                         <th style="display: none;">ID</th>                                                       
-                                        <th >Conductor</th>
-                                        <th >Tipo </th>
-                                        <th style="color:#fff;">Descripcion</th>
-                                        <th style="color: red;">Fecha inicial</th>
-                                        <th style="color: red;">Fecha final</th>
+                                        <th style="color:#fff;">Conductor</th>
+                                        <th style="color:#fff;">Tipo </th>
+                                        <th style="color:#fff;">Descripción</th>
+                                        <th style="color:#fff;">Fecha Inicial</th>
+                                        <th style="color:#fff;">Fecha Final</th>
                                         <th style="color:#fff;">Vigencia</th>
                                         <th style="color:#fff;">Estado</th>
                                         <th style="color:#fff;">Acciones</th>

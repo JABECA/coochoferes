@@ -20,6 +20,7 @@ class CreateRegpasajerosTable extends Migration
             $table->integer('cant_pasajeros');
             $table->integer('cant_pasajeros_terminal')->nullable();
             $table->string('ruta')->nullable();
+            $table->integer('dinero_taquilla')->nullable();
             $table->date('fecha_registro')->nullable();
             $table->dateTime('hora_registro')->nullable();
             $table->dateTime('fecha_recaudo')->nullable();

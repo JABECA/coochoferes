@@ -8,7 +8,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Crear registro de pasajeros</h3>
+            <h3 class="page__heading">Crear Registro de Pasajeros</h3>
         </div>
         <?php 
             date_default_timezone_set('America/Bogota');
@@ -48,9 +48,9 @@
 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Numero Interno:</label>
+                                    <label for="">N&uacutemero Interno:</label>
                                     <select class="select2 form-control num_interno" name="num_interno" id="num_interno">
-                                        <option value="" selected>Seleccione un vehiculo: </option>
+                                        <option value="" selected>Seleccione un veh&iacuteculo: </option>
                                         <?php 
                                         foreach ($Numerosinternos as $key => $value) {
                                             echo "<option value='".$value."'> ".$value."<option/>";
@@ -65,16 +65,27 @@
 
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="">Nombre conductor:</label>
+                                    <label for="">Nombre Conductor:</label>
                                     <input  class="form-control" type="text"  name="nombre_conductor" id="nombre_conductor">
                                     <!-- {!! Form::number('cant_pasajeros_terminal', null, array('class' => 'form-control')) !!} -->
                                 </div>
                             </div>
-
+                            
+                             <div class="col-xs-12 col-sm-3 col-md-3">
+                                <div class="form-group">
+                                    <label for="">Ruta:</label>
+                                    <select class="select2 form-control" id="ruta" name="ruta">
+                                        <option value="Virginia">Virginia</option>
+                                        <option  value="Cartago">Cartago</option>
+                                        <option value="Armenia">Armenia</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
                                     <label for="">Cantidad Pasajeros Terminal:</label>
-                                    <input  class="form-control" type="number"  max="19" name="cant_pasajeros_terminal" id="cant_pasajeros_terminal">
+                                    <input  class="form-control" type="number"  max="38" name="cant_pasajeros_terminal" id="cant_pasajeros_terminal">
                                     <!-- {!! Form::number('cant_pasajeros_terminal', null, array('class' => 'form-control')) !!} -->
                                 </div>
                             </div>
@@ -100,21 +111,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-3 col-md-3">
-                                <div class="form-group">
-                                    <label for="">Ruta:</label>
-                                    <select class="select2 form-control" id="ruta" name="ruta">
-                                        <option value="Virginia">Virginia</option>
-                                        <option  value="Cartago">Cartago</option>
-                                        <option value="Armenia">Armenia</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
 
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label for="">Observaciones:</label>
-                                    <input type="text" name="observaciones" class="form-control observaciones" placeholder="este campo puede ir vacio">
+                                    <input type="text" name="observaciones" class="form-control observaciones" placeholder="Este campo puede ir vacio">
                                 </div>
                             </div>
 
@@ -143,13 +145,13 @@
                             <table  class="table table-striped table-bordered shadow-lg mt-4  regpasajerosOperativo" style="width:100%;">
                                 <thead class="tabla-header-bg">
                                     <th style="display: none;">ID</th>                                                       
-                                    <th ># Interno</th>
-                                    <th >Conductor</th>
-                                    <th >Cantidad Pasajeros Terminal</th>
-                                    <th >Cantidad Pasajeros Ruta</th>
-                                    <th >Ruta</th>
+                                    <th style="color:#fff;"># Interno</th>
+                                    <th style="color:#fff;">Conductor</th>
+                                    <th style="color:#fff;">Cantidad Pasajeros Terminal</th>
+                                    <th style="color:#fff;">Cantidad Pasajeros Ruta</th>
+                                    <th style="color:#fff;">Ruta</th>
                                     <th style="color:#fff;">Fecha Ruta</th>
-                                    <th style="color:#fff;">Fecha/Hora Liquidacion</th>
+                                    <th style="color:#fff;">Fecha Hora Monitoreo</th>
                                     <!-- <th style="color:#fff;">Acciones</th> -->
                                 </thead>  
                                 <tbody>
@@ -227,12 +229,23 @@
                             d.fecha_fin  = $('.fecha_fin').val()
                         },
                     },
-                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Toditos"]],
+                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
                       "iDisplayLength": 10,
                       "aaSorting": [[1, 'desc']],
                     dataType: 'json',
                     type: "POST",
-                    dom: 'lfrtip',
+                    dom: 'lBrtip',
+                    buttons: [
+
+                        {
+                            extend: 'excel',
+                            className: 'btn-light',
+                            text: 'Excel',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        }
+                    ],
                     columns: [
 
                         {
@@ -247,7 +260,7 @@
                             data: 'num_interno',
                             name: '# interno',
                             searchable: true,
-                            orderable: true,
+                            orderable: false,
                             className: "text-center"
                         },
                         {
@@ -286,7 +299,8 @@
 
                         {
                             data: 'hora_registro',
-                            name: 'Fecha/Hora liquidacion'
+                            name: 'Fecha/Hora liquidacion',
+                            orderable: true,
                         }
                         
                        
