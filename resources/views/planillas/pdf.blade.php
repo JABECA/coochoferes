@@ -65,16 +65,23 @@
     <head>               
         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" > -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" type="text/javascript"></script>
+        <script  src="https://code.jquery.com/jquery-3.6.4.min.js"  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="  crossorigin="anonymous"></script>
+        
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" type="text/javascript" ></script> -->
+        <style type="text/css" media="screen">
+           
+        </style>
     </head>
     <body>
 
             @include('planillas.headerpdf')
        
-            <table  id='table' border='1' align="center" style="width:100%; font-size: 10px; display: none;" > 
+            <table  id='table' border='1' align="center" style="width:100%; font-size: 10px; display: block;" > 
 
                 <thead>
                     <th class="centrar">Indicador</th>
@@ -87,11 +94,9 @@
                     <tr>
                         <td class="centrar"></td>
                         <td style="text-align: center;"><b>MES: {{$monthName}} &nbsp;&nbsp;&nbsp; Año: {{$anio}} </b></td>
-                        <?php 
-                        for ($i=1; $i <= 31 ; $i++) { 
-                            echo "<td>".$i."</td>";
-                        }
-                        ?>
+                        <td id="dia1">1</td><td id="dia2">2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+                        <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td>
+                        <td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td>
                     </tr>
 
                     <tr>
@@ -99,7 +104,7 @@
                         <td >Presión</td>
                         <?php 
                             for ($i=0; $i <=30 ; $i++) { 
-                            echo "<td></td>";
+                            echo "<td id='p".$i."'></td>";
                             }
                         ?>
                     </tr>
@@ -518,6 +523,37 @@
 
             @include('planillas.footerpdf')
       
+           <table id='tbldatosresponsables' border='1' align="center" style="width:100%; font-size: 10px;">
+                <thead>
+                    <tr class="centrar">
+                        <th style="width:3%; height:2%; ">DIA</th>
+                        <th style="width:20%">CONDUCTOR</th>
+                        <th style="width:20%">DESPACHADOR</th>
+                        <th style="width:57%">OBSERVACIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <?php 
+                        for ($i=0; $i <= 30 ; $i++) { 
+                            $J=$i+1;
+                            echo "
+                                <tr class='centrar'>
+                                    <td style='width:3%;  height:2.4%; '>$J</td>
+                                    <td style='width:20%; height:2.4%; '></td>
+                                    <td style='width:20%; height:2.4%; '></td>
+                                    <td style='width:20%; height:2.4%; '></td>
+                                </tr>
+                            ";
+                        }
+
+
+                    ?>
+                        
+                                
+                    
+                </tbody>
+            </table>
         
         <button type="button" onclick="exportPdf()" class="btn btn-primary">Export To PDF</button>
     </body>
@@ -525,6 +561,10 @@
         
         var planillas = '<?php echo $planilla; ?>';
         var datos = JSON.parse(planillas);
+
+        var ok = '<?php echo $imagenes[2]; ?>';
+        var x = '<?php echo $imagenes[3]; ?>';
+
 
         //para imprimir el numero interno del vehiculo
         var tabla_vehiculo = document.getElementById('table');
@@ -588,7 +628,20 @@
                 let dia_mes = new Date(datos[i]['fecha']);
                 let dia_planilla = dia_mes.getDate();
                 var tabla = document.getElementById('table');
+
+                var tablaresponsables = document.getElementById('tbldatosresponsables');
                 
+                
+                // tabla.rows[2].cells[dia_planilla+1].innerHTML   = presion; 
+                let id = '#p'+(dia_planilla-1)+' '; 
+                $(id).addClass('verde');
+                if(presion == 1){
+                    var imgEstado = '<?php echo $imagenes[2]; ?>';
+                }else if(presion == 0){
+                    var imgEstado = '<?php echo $imagenes[3]; ?>';
+                }else{
+                    var imgEstado = '';                    
+                }
                 tabla.rows[2].cells[dia_planilla+1].innerHTML   = presion;
                 tabla.rows[3].cells[dia_planilla].innerHTML     = labrado;
                 tabla.rows[4].cells[dia_planilla].innerHTML     = tuercas;
@@ -637,6 +690,39 @@
               
             }
 
+
+        for (var i = 0; i < datos.length; i++) {
+                
+                let observaciones = '';
+                let conductor = datos[i]['conductor'];
+                let supervisor = datos[i]['usr_supervisa'];
+                
+                let obs_supervisor = datos[i]['obs_supervisor'];
+                let obs_conductor = datos[i]['observaciones'];
+
+                if (obs_conductor && obs_supervisor){
+                    obs_conductor = ' C: '+obs_conductor+'</br>';
+                    observaciones += obs_conductor;
+                }else if(obs_conductor){
+                    obs_conductor = ' C: '+obs_conductor;
+                    observaciones += obs_conductor;
+                }
+
+                if (obs_supervisor){
+                    obs_supervisor = 'D: '+obs_supervisor;
+                    observaciones += obs_supervisor;
+                }
+
+                let dia_mes = new Date(datos[i]['fecha']);
+                let dia_planilla = dia_mes.getDate();
+
+                var tablaresponsables = document.getElementById('tbldatosresponsables');
+              
+                tablaresponsables.rows[dia_planilla].cells[1].innerHTML   = conductor;
+                tablaresponsables.rows[dia_planilla].cells[2].innerHTML   = supervisor;
+                tablaresponsables.rows[dia_planilla].cells[3].innerHTML   = observaciones;
+              
+            }
         //daata´pra pintar los vencimientos
         var fec_venc_licencia = '<?php echo($vencimientos['fec_venc_licencia']) ?>';
         var fec_venc_SOAT     = '<?php echo($vencimientos['fec_venc_SOAT']) ?>';
@@ -705,6 +791,44 @@
 
 
             pdf.autoTable({html:'#table',
+
+                didParseCell: (HookData) => {
+                     
+                    if (HookData.cell.text[0] == ['1']) {
+                        HookData.cell.text = 'C';
+                        HookData.cell.styles.textColor = '#008f39'; //#008f39 verde //#ff0000 rojo
+                    }else if(HookData.cell.text[0] == ['2']){
+                        HookData.cell.text = 'N';
+                        HookData.cell.styles.textColor = '#ff0000';
+                    }
+
+                 
+                    if(HookData.cell.raw.id == 'dia1'){
+                        HookData.cell.text = '1';
+                        HookData.cell.styles.textColor = [0,0,0];
+                     }
+
+                     if(HookData.cell.raw.id == 'dia2'){
+                        HookData.cell.text = '2';
+                        HookData.cell.styles.textColor = [0,0,0];
+                     }
+                    
+
+
+                    // if (HookData.cell.text[0] == ['1']) {
+                    //     HookData.cell.text = '';
+                    //     var imageOK = new Image();
+                    //     imageOK.src = ok; /// URL de la imagen
+                    //     pdf.addImage(imageOK, 'PNG', HookData.cell.x + 2, HookData.cell.y + 2, 5, 5);
+                    //     // HookData.cell.text[0].textColor = [249, 178, 51];
+                    // } else if(HookData.cell.text[0] == ['2']) {
+                    //     HookData.cell.text = '';
+                    //     var imageX = new Image();
+                    //     imageX.src = x; /// URL de la imagen
+                    //     pdf.addImage(imageX, 'PNG', HookData.cell.x + 2, HookData.cell.y + 2, 5, 5);
+                    // }
+                   
+                },
                 startY: 55,
                 startX: 5,
                 showHead: 'everyPage',
@@ -832,13 +956,129 @@
             imageFooter.src = logoST; /// URL de la imagen
             pdf.addImage(imageFooter, 'PNG', 25, 730, 110, 30); // Agregar la imagen al PDF (X, Y, Width, Height)
             
+            pdf.setFontSize(8);
+            pdf.setTextColor("#008f39")  //#008f39  #ff0000
+            pdf.text('C: Cumple', 250,645);
+
+            pdf.setFontSize(8);
+            pdf.setTextColor("#ff0000")  //#008f39  #ff0000
+            pdf.text('N: No Cumple', 350,645);
+            // var image = new Image();
+            // image.src = imgEstado; /// URL de la imagen
+            // pdf.addImage(image, 'PNG', 300, 60, 5, 5); // Agregar la imagen al PDF (X, Y, Width, Height)
+
+
             //si la imagen es demasiado pesada esperar la carga de la imagen para mostrar el pdf(opcional)
             // image1.onload = function(){
             //     pdf.save("mipdf.pdf");
             // }
             let mes = new Date(datos[0]['fecha']);
-            let mes_ = mes.getMonth(mes);
+            let mes_a = mes.getMonth(mes);
+            let mes_ = mes_a+1;
             let anio = mes.getFullYear(mes);
+
+            //se adiciona una nnueva pagina para el registro de los responsables y despachador
+            pdf.addPage();
+
+            pdf.autoTable({html:'#encabezado2',
+                startY: 13,
+                startX: 5,
+                showHead: 'everyPage',
+                theme:'grid', //striped
+                margin: { horizontal: 10 },
+                setFont: 'courier',
+                columnStyles:{
+                    0:{cellWidth:150 },
+                    1:{cellWidth:252, halign: 'center' },
+                    2:{cellWidth:90},
+                    3:{cellWidth:100},
+                    
+
+                },
+                rowStyles:{
+                    0:{halign: 'center' },
+                },
+                bodyStyles: {lineColor: [1, 1, 1]},
+                // headStyles :{ fillColor : [227, 6, 19], textColor: [0, 0, 0] },
+                // headStyles :{ fillColor : [243, 146, 0], textColor: [0, 0, 0] },
+                 headStyles :{ fillColor : [249, 178, 51], textColor: [0, 0, 0] },
+                // alternateRowStyles: {fillColor : [231, 215, 252]},
+                tableLineColor: [0, 0, 0],
+
+                tableLineWidth: 0.1,
+                styles: {overflow: 'linebreak', textColor: 0, cellWidth: '5', font: 'courier', halign: 'center', fontSize: 9, cellPadding: 1, overflowColumns: 'linebreak'},
+            });  //encabezado
+
+            var imageCabecera = new Image();
+            imageCabecera.src = logoCompleto; /// URL de la imagen
+            pdf.addImage(imageCabecera, 'PNG', 25, 8, 120, 50); // Agregar la imagen al PDF (X, Y, Width, Height)
+
+            //aca van la tabla con los datos
+
+            pdf.autoTable({html:'#tbldatosresponsables',
+
+                startY: 55,
+                startX: 5,
+                showHead: 'everyPage',
+                theme:'grid', //striped
+                margin: { horizontal: 10 },
+                setFont: 'courier',
+                columnStyles:{
+                    0:{cellWidth:15, halign: 'center', minCellHeight: 20 },
+                    1:{cellWidth:130, halign: 'center' },
+                    2:{cellWidth:130, halign: 'center'},
+                    3:{cellWidth:317},
+
+                },
+                rowStyles:{
+                    0:{halign: 'center' },
+                },
+                bodyStyles: {lineColor: [1, 1, 1]},
+                // headStyles :{ fillColor : [227, 6, 19], textColor: [0, 0, 0] },
+                // headStyles :{ fillColor : [243, 146, 0], textColor: [0, 0, 0] },
+                 headStyles :{ fillColor : [249, 178, 51], textColor: [0, 0, 0] },
+                // alternateRowStyles: {fillColor : [231, 215, 252]},
+                tableLineColor: [0, 0, 0],
+
+                tableLineWidth: 0.1,
+                styles: {overflow: 'linebreak', cellWidth: '5', valign: 'middle', textColor: 0, font: 'courier', halign: 'left', fontSize: 5, cellPadding: 1, overflowColumns: 'linebreak'},
+
+
+            });  //cuerpo
+
+            pdf.autoTable({html:'#pie2',
+                startY: 717,
+                startX: 5,
+                showHead: 'everyPage',
+                theme:'grid', //striped
+                margin: { horizontal: 10 },
+                setFont: 'courier',
+                columnStyles:{
+                    0:{cellWidth:150 },
+                    1:{cellWidth:442, halign: 'right' },
+
+                },
+                rowStyles:{
+                    0:{halign: 'left' },
+                    1:{halign: 'left' },
+                    2:{halign: 'left' },
+                    3:{halign: 'left' },
+                    
+                },
+                bodyStyles: {lineColor: [0, 0, 0, 0], fillColor : [0, 0, 0, 0] },
+                headStyles :{ fillColor : [249, 178, 51], textColor: [0, 0, 0] },
+                // alternateRowStyles: {fillColor : [231, 215, 252]},
+                tableLineColor: [255, 255, 255],
+
+                tableLineWidth: 0.9,
+                styles: {overflow: 'linebreak', lineColor: [255,255, 255], cellWidth: '5', textColor: 0, font: 'courier', halign: 'center', fontSize: 7, cellPadding: 1, overflowColumns: 'linebreak'},
+            });  //pie
+
+            var imageFooter = new Image();
+            imageFooter.src = logoST; /// URL de la imagen
+            pdf.addImage(imageFooter, 'PNG', 25, 730, 110, 30); // Agregar la imagen al PDF (X, Y, Width, Height)
+
+
        
             // 'PA'+numero_interno+'_'+mes_+anio
             // const file = new File([blob],"nombre.pdf", { type:"application/pdf" });

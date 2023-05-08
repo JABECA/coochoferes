@@ -86,7 +86,11 @@ class PlanillaController extends Controller
 
         $logoCompleto = asset('img/coochoferes.png');
         $logoST = asset('img/ST.png');
-        $imagenes = array($logoCompleto ,$logoST);
+        $ok     = asset('img/ok.png');
+        $x     = asset('img/x.png');
+        $ok_base64 = asset('img/ok_base64.png');
+
+        $imagenes = array($logoCompleto ,$logoST, $ok, $x, $ok_base64);
         
         //consultamos por rango de fecha
         // $planillas = Planilla::where('numero_interno', $numero_interno)->whereBetween('fecha', ['2023-04-01', '2023-04-30'])->get();
