@@ -943,146 +943,461 @@
                     
                     e.preventDefault();
 
+                    var itemsNocumple = '';
+
+                    
+                    // ____________________________________________________________________________________________
                     var presion = $("input[type=radio][name = presion]:checked ").val();
-                    if (presion) {} else { alert('no fue seleccionada la presion de las llantas'); return false; }
+                    if (presion) { 
+                        if($("input[type=radio][name = presion]:checked ").val() == 2){
+                            itemsNocumple += 'Presion';
+                        }
+                    } else { alert('no fue seleccionada la presion de las llantas'); return false; }
+                    // ********************************************************************************************
+                    
 
+                    
+
+                    // ____________________________________________________________________________________________
                     var labrado = $("input[type=radio][name = labrado]:checked ").val();
-                    if (labrado) { } else { alert('no fue seleccionada el labrado de las llantas'); return false; }
-
-                    var tuercas = $("input[type=radio][name = tuercas]:checked ").val();
-                    if (tuercas) { } else { alert('no fue seleccionada Tuercas Completas y Aseguradas'); return false; }
+                    if (labrado) { 
+                        if($("input[type=radio][name = labrado]:checked ").val() == 2){
+                            itemsNocumple += ' Labrado ';
+                        }
+                    } else { alert('no fue seleccionada el labrado de las llantas'); return false; }
+                    // ********************************************************************************************
                     
+
+
+
+                    // ____________________________________________________________________________________________
+                    var tuercas = $("input[type=radio][name = tuercas]:checked").val();
+                    if (tuercas) { 
+                        if($("input[type=radio][name = tuercas]:checked ").val() == 2){
+                            itemsNocumple += ' Tuercas ';
+                        }
+                    } else { alert('no fue seleccionada Tuercas Completas y Aseguradas'); return false; }
+                    // ********************************************************************************************
+                    
+
+
+
+                    // ____________________________________________________________________________________________
                     var rines = $("input[type=radio][name = rines]:checked ").val();
-                    if (rines) { } else { alert('no fue seleccionada Estado de los Rines'); return false; }
+                    if (rines) { 
+                        if($("input[type=radio][name = rines]:checked ").val() == 2){
+                            itemsNocumple += ' Rines ';
+                        }
+                    } else { alert('no fue seleccionada Estado de los Rines'); return false; }
+                    // ********************************************************************************************
                     
-                    var repuesto = $("input[type=radio][name = repuesto]:checked ").val();
-                    if (repuesto) { } else { alert('no fue seleccionada Estado Llanta de Repuesto  '); return false; }
+
+
+
+                    // ____________________________________________________________________________________________
+                    var repuesto = $("input[type=radio][name = repuesto]:checked").val();
+                    if (repuesto) { 
+                        if($("input[type=radio][name = repuesto]:checked ").val() == 2){
+                            itemsNocumple += ' Repuesto ';
+                        }
+                    } else { alert('no fue seleccionada Estado Llanta de Repuesto  '); return false; }
+                    // ********************************************************************************************
                     
-                    var freno_parqueo = $("input[type=radio][name = freno_parqueo]:checked ").val();
-                    if (freno_parqueo) { } else { alert('no fue seleccionada Funciona Freno de Parqueo'); return false; }
+
+
+
+                    // ____________________________________________________________________________________________
+                    var freno_parqueo = $("input[type=radio][name = freno_parqueo]:checked").val();
+                    if (freno_parqueo) { 
+                        if($("input[type=radio][name = freno_parqueo]:checked ").val() == 2){
+                            itemsNocumple += ' FrenoParqueo ';
+                        }
+                    } else { alert('no fue seleccionada Funciona Freno de Parqueo'); return false; }
+                    // ********************************************************************************************
                     
-                    var sistema_frenos = $("input[type=radio][name = sistema_frenos]:checked ").val();
-                    if (sistema_frenos) { } else { alert('no fue seleccionada Funciona el Sistema de Frenos  '); return false; }
+
+
+
+                    // ____________________________________________________________________________________________
+                    var sistema_frenos = $("input[type=radio][name = sistema_frenos]:checked").val();
+                    if (sistema_frenos) { 
+                        if($("input[type=radio][name = sistema_frenos]:checked ").val() == 2){
+                            itemsNocumple += ' SistemaFrenos ';
+                        }
+                    } else { alert('no fue seleccionada Funciona el Sistema de Frenos  '); return false; }
+                    // ********************************************************************************************
                     
-                    var liquido_frenos = $("input[type=radio][name = liquido_frenos]:checked ").val();
-                    if (liquido_frenos) { } else { alert('no fue seleccionada Liquido de Frenos dentro de los limites'); return false; }
+
+
+
+                    // ____________________________________________________________________________________________
+                    var liquido_frenos = $("input[type=radio][name = liquido_frenos]:checked").val();
+                    if (liquido_frenos) { 
+                        if($("input[type=radio][name = liquido_frenos]:checked ").val() == 2){
+                            itemsNocumple += ' LiquidoFrenos ';
+                        }
+                    } else { alert('no fue seleccionada Liquido de Frenos dentro de los limites'); return false; }
+                    // ********************************************************************************************
                     
-                    var luz_reversa = $("input[type=radio][name = luz_reversa]:checked ").val();
-                    if (luz_reversa) { } else { alert('no fue seleccionada Enciende Luz Reversa'); return false; }
-                    
-                    var luces_bajas = $("input[type=radio][name = luces_bajas]:checked ").val();
-                    if (luces_bajas) { } else { alert('no fue seleccionada Enciende Luces Bajas '); return false; }
-                    
-                    var luces_altas = $("input[type=radio][name = luces_altas]:checked ").val();
-                    if (luces_altas) { } else { alert('no fue seleccionada Enciende Luces Altas'); return false; }
 
-                    var cucuyos = $("input[type=radio][name = cucuyos]:checked ").val();
-                    if (cucuyos) { } else { alert('no fue seleccionada Enciende Cocuyos'); return false; }
 
-                    var luces_freno = $("input[type=radio][name = luces_freno]:checked ").val();
-                    if (luces_freno) { } else { alert('no fue seleccionada Enciende Luces Freno'); return false; }
-                    
-                    var direccionales = $("input[type=radio][name = direccionales]:checked ").val();
-                    if (direccionales) { } else { alert('no fue seleccionada Enciende Direccionales(adelante y atras)'); return false; }
 
-                    var nivel_conbustible = $("input[type=radio][name = nivel_conbustible]:checked ").val();
-                    if (nivel_conbustible) { } else { alert('no fue seleccionada Nivel del Combustible '); return false; }
+                    // ____________________________________________________________________________________________
+                    var luz_reversa = $("input[type=radio][name = luz_reversa]:checked").val();
+                    if (luz_reversa) { 
+                        if($("input[type=radio][name = luz_reversa]:checked ").val() == 2){ 
+                            itemsNocumple += ' LuzReversa ';
+                        }
+                    } else { alert('no fue seleccionada Enciende Luz Reversa'); return false; }
+                    // ********************************************************************************************
 
-                    var presion_aceite = $("input[type=radio][name = presion_aceite]:checked ").val();
-                    if (presion_aceite) { } else { alert('no fue seleccionada Indicador Presion Aceite'); return false; }
 
-                    var nivel_bateria = $("input[type=radio][name = nivel_bateria]:checked ").val();
-                    if (nivel_bateria) { } else { alert('no fue seleccionada Indicador Nivel Bateria'); return false; }
+                    // ____________________________________________________________________________________________
+                    var luces_bajas = $("input[type=radio][name = luces_bajas]:checked").val();
+                    if (luces_bajas) { 
+                        if($("input[type=radio][name = luces_bajas]:checked ").val() == 2){
+                            itemsNocumple += ' LucesBajas ';
+                        }
+                    } else { alert('no fue seleccionada Enciende Luces Bajas '); return false; }
+                    // ********************************************************************************************
 
-                    var nivel_temperatura = $("input[type=radio][name = nivel_temperatura]:checked ").val();
-                    if (nivel_temperatura) { } else { alert('no fue seleccionada Indicador de Temperatura '); return false; }
 
-                    var retrovisores = $("input[type=radio][name = retrovisores]:checked ").val();
-                    if (retrovisores) { } else { alert('no fue seleccionada Espejos Retrovidores Funcionando'); return false; }
+                    // ____________________________________________________________________________________________
+                    var luces_altas = $("input[type=radio][name = luces_altas]:checked").val();
+                    if (luces_altas) { 
+                        if($("input[type=radio][name = luces_altas]:checked ").val() == 2){
+                            itemsNocumple += ' LucesAltas ';
+                        }
+                    } else { alert('no fue seleccionada Enciende Luces Altas'); return false; }
+                    // ********************************************************************************************
 
-                    var puertas = $("input[type=radio][name = puertas]:checked ").val();
-                    if (puertas) { } else { alert('no fue seleccionada Todas la Puertas Cierran y Ajustan '); return false; }
 
-                    var nivel_aceite = $("input[type=radio][name = nivel_aceite]:checked ").val();
-                    if (nivel_aceite) { } else { alert('no fue seleccionada Nivel Aceite Motor'); return false; }
+                    // ____________________________________________________________________________________________
+                    var cucuyos = $("input[type=radio][name = cucuyos]:checked").val();
+                    if (cucuyos) { 
+                        if($("input[type=radio][name = cucuyos]:checked ").val() == 2){
+                            itemsNocumple += ' Cucuyos ';
+                        }
+                    } else { alert('no fue seleccionada Enciende Cocuyos'); return false; }
+                    // ********************************************************************************************
 
-                    var nivel_direccion = $("input[type=radio][name = nivel_direccion       ]:checked ").val();
-                    if (nivel_direccion) { } else { alert('no fue seleccionada Nivel Liquido Direccion'); return false; }
 
-                    var nivel_refrigerante = $("input[type=radio][name = nivel_refrigerante]:checked ").val();
-                    if (nivel_refrigerante) { } else { alert('no fue seleccionada Nivel Liquido Refrigerante'); return false; }
+                    // ____________________________________________________________________________________________
+                    var luces_freno = $("input[type=radio][name = luces_freno]:checked").val();
+                    if (luces_freno) { 
+                        if($("input[type=radio][name = luces_freno]:checked ").val() == 2){
+                            itemsNocumple += ' LucesFreno ';
+                        }
+                    } else { alert('no fue seleccionada Enciende Luces Freno'); return false; }
+                    // ********************************************************************************************
 
-                    var nivel_limpiabrisas = $("input[type=radio][name = nivel_limpiabrisas    ]:checked ").val();
-                    if (nivel_limpiabrisas) { } else { alert('no fue seleccionada Nivel Agua Limpiabrisas'); return false; }
 
-                    var pito = $("input[type=radio][name = pito]:checked ").val();
-                    if (pito) { } else { alert('no fue seleccionada Pito Funcionando'); return false; }
+                    // ____________________________________________________________________________________________
+                    var direccionales = $("input[type=radio][name = direccionales]:checked").val();
+                    if (direccionales) { 
+                        if($("input[type=radio][name = direccionales]:checked ").val() == 2){
+                            itemsNocumple += ' Direccionales ';
+                        }
+                    } else { alert('no fue seleccionada Enciende Direccionales(adelante y atras)'); return false; }
+                    // ********************************************************************************************
 
-                    var limpiabrisas = $("input[type=radio][name = limpiabrisas]:checked ").val();
-                    if (limpiabrisas) { } else { alert('no fue seleccionada Limpiabrisas Funcionando'); return false; }
 
-                    var tapa_radiador = $("input[type=radio][name = tapa_radiador]:checked ").val();
-                    if (tapa_radiador) { } else { alert('no fue seleccionada Radiador con Tapa Ajustada'); return false; }
+                    // ____________________________________________________________________________________________
+                    var nivel_conbustible = $("input[type=radio][name = nivel_conbustible]:checked").val();
+                    if (nivel_conbustible) { 
 
-                    var correa_ventilador = $("input[type=radio][name = correa_ventilador]:checked ").val();
-                    if (correa_ventilador) { } else { alert('no fue seleccionada Correa Ventilador Tensionada'); return false; }
+                        if($("input[type=radio][name = nivel_conbustible]:checked ").val() == 2){
+                            itemsNocumple += ' NivelCombustible ';
+                        }
+                    } else { alert('no fue seleccionada Nivel del Combustible '); return false; }
+                    // ********************************************************************************************
 
-                    var bateria = $("input[type=radio][name = bateria]:checked ").val();
-                    if (bateria) { } else { alert('no fue seleccionada Bateria sin Residuos'); return false; }
 
-                    var conos_triangulos_tacos = $("input[type=radio][name = conos_triangulos_tacos]:checked ").val();
-                    if (conos_triangulos_tacos) { } else { alert('no fue seleccionada Conos, Triangulos, Tacos'); return false; }
+                    // ____________________________________________________________________________________________
+                    var presion_aceite = $("input[type=radio][name = presion_aceite]:checked").val();
+                    if (presion_aceite) { 
+                        if($("input[type=radio][name = presion_aceite]:checked ").val() == 2){
+                            itemsNocumple += ' PresionAceite ';
+                        }
+                    } else { alert('no fue seleccionada Indicador Presion Aceite'); return false; }
+                    // ********************************************************************************************
 
-                    var herramientas = $("input[type=radio][name = herramientas]:checked ").val();
-                    if (herramientas) { } else { alert('no fue seleccionada Herramientas'); return false; }
 
-                    var linterna_gato = $("input[type=radio][name = linterna_gato]:checked ").val();
-                    if (linterna_gato) { } else { alert('no fue seleccionada Linterna, Gato'); return false; }
+                    // ____________________________________________________________________________________________
+                    var nivel_bateria = $("input[type=radio][name = nivel_bateria]:checked").val();
+                    if (nivel_bateria) { 
+                        if($("input[type=radio][name = nivel_bateria]:checked ").val() == 2){
+                            itemsNocumple += ' NivelBateria ';
+                        }
+                    } else { alert('no fue seleccionada Indicador Nivel Bateria'); return false; }
+                    // ********************************************************************************************
 
-                    var cruceta_llave_pernos = $("input[type=radio][name = cruceta_llave_pernos]:checked ").val();
-                    if (cruceta_llave_pernos) { } else { alert('no fue seleccionada Cruceta, Llave de Pernos'); return false; }
 
-                    var extintor = $("input[type=radio][name = extintor]:checked ").val();
-                    if (extintor) { } else { alert('no fue seleccionada Extintor 5 Libras'); return false; }
+                    // ____________________________________________________________________________________________
+                    var nivel_temperatura = $("input[type=radio][name = nivel_temperatura]:checked").val();
+                    if (nivel_temperatura) { 
+                        if($("input[type=radio][name = nivel_temperatura]:checked ").val() == 2){
+                            itemsNocumple += ' NivelTemperatura ';
+                        }
+                    } else { alert('no fue seleccionada Indicador de Temperatura '); return false; }
+                    // ********************************************************************************************
 
-                    var salida_emergencia = $("input[type=radio][name = salida_emergencia]:checked ").val();
-                    if (salida_emergencia) { } else { alert('no fue seleccionada Salidas de Emergencia'); return false; }
 
-                    var botiquin = $("input[type=radio][name = botiquin]:checked ").val();
-                    if (botiquin) { } else { alert('no fue seleccionada Botiquin'); return false; }
+                    // ____________________________________________________________________________________________
+                    var retrovisores = $("input[type=radio][name = retrovisores]:checked").val();
+                    if (retrovisores) { 
+                        if($("input[type=radio][name = retrovisores]:checked ").val() == 2){
+                            itemsNocumple += ' Retrovisores ';
+                        }
+                    } else { alert('no fue seleccionada Espejos Retrovidores Funcionando'); return false; }
+                    // ********************************************************************************************
 
-                    var cinturones = $("input[type=radio][name = cinturones]:checked ").val();
-                    if (cinturones) { } else { alert('no fue seleccionada Cinturones de Seguridad'); return false; }
 
-                    var velocimetro = $("input[type=radio][name = velocimetro]:checked ").val();
-                    if (velocimetro) { } else { alert('no fue seleccionada Dispositivo de Velocidad (solo colectivo)'); return false; }
+                    // ____________________________________________________________________________________________
+                    var puertas = $("input[type=radio][name = puertas]:checked").val();
+                    if (puertas) { 
+                        if($("input[type=radio][name = puertas]:checked ").val() == 2){
+                            itemsNocumple += ' Puertas ';
+                        }
+                    } else { alert('no fue seleccionada Todas la Puertas Cierran y Ajustan '); return false; }
+                    // ********************************************************************************************
 
-                    var aseo_general = $("input[type=radio][name = aseo_general]:checked ").val();
-                    if (aseo_general) { } else { alert('no fue seleccionada Aseo General'); return false; }
 
+                    // ____________________________________________________________________________________________
+                    var nivel_aceite = $("input[type=radio][name = nivel_aceite]:checked").val();
+                    if (nivel_aceite) { 
+                        if($("input[type=radio][name = nivel_aceite]:checked ").val() == 2){
+                            itemsNocumple += ' NivelAceite ';
+                        }
+
+                    } else { alert('no fue seleccionada Nivel Aceite Motor'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var nivel_direccion = $("input[type=radio][name = nivel_direccion]:checked").val();
+                    if (nivel_direccion) { 
+                        if($("input[type=radio][name = nivel_direccion]:checked ").val() == 2){
+                            itemsNocumple += ' NivelDireccion ';
+                        }
+                    } else { alert('no fue seleccionada Nivel Liquido Direccion'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var nivel_refrigerante = $("input[type=radio][name = nivel_refrigerante]:checked").val();
+                    if (nivel_refrigerante) { 
+                        if($("input[type=radio][name = nivel_refrigerante]:checked ").val() == 2){
+                            itemsNocumple += ' NivelRefrigerante ';
+                        }
+                    } else { alert('no fue seleccionada Nivel Liquido Refrigerante'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var nivel_limpiabrisas = $("input[type=radio][name = nivel_limpiabrisas]:checked").val();
+                    if (nivel_limpiabrisas) { 
+                        if($("input[type=radio][name = nivel_limpiabrisas]:checked ").val() == 2){
+                            itemsNocumple += ' NivelLimpiabrisas ';
+                        }
+                    } else { alert('no fue seleccionada Nivel Agua Limpiabrisas'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var pito = $("input[type=radio][name = pito]:checked").val();
+                    if (pito) { 
+                        if($("input[type=radio][name = pito]:checked ").val() == 2){
+                            itemsNocumple += ' Pito ';
+                        }
+                    } else { alert('no fue seleccionada Pito Funcionando'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var limpiabrisas = $("input[type=radio][name = limpiabrisas]:checked").val();
+                    if (limpiabrisas) { 
+                        if($("input[type=radio][name = limpiabrisas]:checked ").val() == 2){
+                            itemsNocumple += ' Limpiabrisas ';
+                        }
+                    } else { alert('no fue seleccionada Limpiabrisas Funcionando'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var tapa_radiador = $("input[type=radio][name = tapa_radiador]:checked").val();
+                    if (tapa_radiador) { 
+                        if($("input[type=radio][name = tapa_radiador]:checked ").val() == 2){
+                            itemsNocumple += ' TapaRadiador ';
+                        }
+                    } else { alert('no fue seleccionada Radiador con Tapa Ajustada'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var correa_ventilador = $("input[type=radio][name = correa_ventilador]:checked").val();
+                    if (correa_ventilador) { 
+                        if($("input[type=radio][name = correa_ventilador]:checked ").val() == 2){
+                            itemsNocumple += ' CorreaVentilador ';
+                        }
+                    } else { alert('no fue seleccionada Correa Ventilador Tensionada'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var bateria = $("input[type=radio][name = bateria]:checked").val();
+                    if (bateria) { 
+                        if($("input[type=radio][name = bateria]:checked ").val() == 2){
+                            itemsNocumple += ' Bateria ';
+                        }
+
+                    } else { alert('no fue seleccionada Bateria sin Residuos'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var conos_triangulos_tacos = $("input[type=radio][name = conos_triangulos_tacos]:checked").val();
+                    if (conos_triangulos_tacos) { 
+                        if($("input[type=radio][name = conos_triangulos_tacos]:checked ").val() == 2){
+                            itemsNocumple += ' ConosTriangulosTacos ';
+                        }
+                    } else { alert('no fue seleccionada Conos, Triangulos, Tacos'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var herramientas = $("input[type=radio][name = herramientas]:checked").val();
+                    if (herramientas) { 
+                        if($("input[type=radio][name = herramientas]:checked ").val() == 2){
+                            itemsNocumple += ' Herramientas ';
+                        }
+
+                    } else { alert('no fue seleccionada Herramientas'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var linterna_gato = $("input[type=radio][name = linterna_gato]:checked").val();
+                    if (linterna_gato) { 
+                        if($("input[type=radio][name = linterna_gato]:checked ").val() == 2){
+                            itemsNocumple += ' LinternaGato ';
+                        }
+                    } else { alert('no fue seleccionada Linterna, Gato'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var cruceta_llave_pernos = $("input[type=radio][name = cruceta_llave_pernos]:checked").val();
+                    if (cruceta_llave_pernos) { 
+                        if($("input[type=radio][name = cruceta_llave_pernos]:checked ").val() == 2){
+                            itemsNocumple += ' CrucetaLlavePernos ';
+                        }
+
+                    } else { alert('no fue seleccionada Cruceta, Llave de Pernos'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var extintor = $("input[type=radio][name = extintor]:checked").val();
+                    if (extintor) { 
+                        if($("input[type=radio][name = extintor]:checked ").val() == 2){
+                            itemsNocumple += ' Extintor ';
+                        }
+
+                    } else { alert('no fue seleccionada Extintor 5 Libras'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var salida_emergencia = $("input[type=radio][name = salida_emergencia]:checked").val();
+                    if (salida_emergencia) { 
+                        if($("input[type=radio][name = salida_emergencia]:checked ").val() == 2){
+                            itemsNocumple += ' SalidaEmergencia ';
+                        }
+
+                    } else { alert('no fue seleccionada Salidas de Emergencia'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var botiquin = $("input[type=radio][name = botiquin]:checked").val();
+                    if (botiquin) { 
+                        if($("input[type=radio][name = botiquin]:checked ").val() == 2){
+                            itemsNocumple += ' Botiquin ';
+                        }
+                    } else { alert('no fue seleccionada Botiquin'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var cinturones = $("input[type=radio][name = cinturones]:checked").val();
+                    if (cinturones) { 
+                        if($("input[type=radio][name = cinturones]:checked ").val() == 2){
+                            itemsNocumple += ' Cinturones ';
+                        }
+                    } else { alert('no fue seleccionada Cinturones de Seguridad'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var velocimetro = $("input[type=radio][name = velocimetro]:checked").val();
+                    if (velocimetro) { 
+                        if($("input[type=radio][name = velocimetro]:checked ").val() == 2){
+                            itemsNocumple += ' Velocimetro ';
+                        }
+                    } else { alert('no fue seleccionada Dispositivo de Velocidad (solo colectivo)'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
+                    var aseo_general = $("input[type=radio][name = aseo_general]:checked").val();
+                    if (aseo_general) { 
+                        if($("input[type=radio][name = aseo_general]:checked ").val() == 2){
+                            itemsNocumple += ' AseoGeneral ';
+                        }
+                    } else { alert('no fue seleccionada Aseo General'); return false; }
+                    // ********************************************************************************************
+
+
+                    // ____________________________________________________________________________________________
                     var conductor_uniformado = $("input[type=radio][name = conductor_uniformado]:checked ").val();
-                    if (conductor_uniformado) { } else { alert('no fue seleccionada Conductor Uniformado'); return false; }
+                    if (conductor_uniformado) { 
+                        if($("input[type=radio][name = conductor_uniformado]:checked ").val() == 2){
+                            itemsNocumple += ' ConductorUniformado ';
+                        }
+                    } else { alert('no fue seleccionada Conductor Uniformado'); return false; }
+                    // ********************************************************************************************
 
-                    var conductor_carnet = $("input[type=radio][name = conductor_carnet]:checked ").val();
-                    if (conductor_carnet) { } else { alert('no fue seleccionada Conductor con Carnet'); return false; }
+
+                    // ____________________________________________________________________________________________
+                    var conductor_carnet = $("input[type=radio][name = conductor_carnet]:checked").val();
+                    if (conductor_carnet) { 
+                        if($("input[type=radio][name = conductor_carnet]:checked ").val() == 2){
+                            itemsNocumple += ' ConductorCarnet ';
+                        }
+                    } else { alert('no fue seleccionada Conductor con Carnet'); return false; }
+                    // ********************************************************************************************
+
 
                     var estado_vehiculo = $("input[type=radio][name = estado_vehiculo]:checked ").val();
                     if (estado_vehiculo) { console.log(estado_vehiculo);} else { alert('no fue seleccionada la aprobacion o desaprobacion del vehículo'); return false; }
 
-                    var cumple   = $('.cumple:checked').length;
-                    var noCumple = $('.noCumple:checked').length;
+                   
 
-                    if (estado_vehiculo == 0) {
+                    if (estado_vehiculo == 2) {
                         var mensajeVehiculo = 'e Inhabilitar el Vehículo';
                     }else{
                         var mensajeVehiculo = 'y Habilitar el Vehículo';
                     }
 
-                    if (noCumple > 0) {
-                        var mensaje = "Existen "+noCumple+ " items que no cumplen los requerimientos de seguridad";
-                    }else{
-                        var mensaje = "";
+                    var mensaje = '';
+                    if(itemsNocumple != ''){
+                        mensaje = 'Los Items que no cumplen requerimientos de seguridad son: '+itemsNocumple;
                     }
+
+                    // var cumple   = $('.cumple:checked').length;
+                    // var noCumple = $('.noCumple:checked').length;
+                    // if (noCumple > 0) { var mensaje = "Existen "+noCumple+ " items que no cumplen los requerimientos de seguridad";}else{var mensaje = "";}
 
                     // console.log(cumple);
                     // console.log(noCumple);

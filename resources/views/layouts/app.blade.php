@@ -23,10 +23,10 @@
 <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/components.css')}}">
-    @yield('page_css')
+@yield('page_css')
 
 
-    @yield('css')
+@yield('css')
 </head>
 <body>
 
@@ -81,6 +81,7 @@
     let loggedInUser =@json(\Illuminate\Support\Facades\Auth::user());
     let loginUrl = '{{ route('login') }}';
     // Loading button plugin (removed from BS4)
+    
     (function ($) {
         $.fn.button = function (action) {
             if (action === 'loading' && this.data('loading-text')) {
@@ -92,16 +93,14 @@
         };
     }(jQuery));
 
+    $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
+        className: 'btn btn-sm'
+    });
+    
 
-    
-    
-            
-            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
-                className: 'btn btn-sm'
-            });
-            $.extend(true, $.fn.dataTable.defaults, {
-                responsive: true,
-                language: {
+    $.extend(true, $.fn.dataTable.defaults, {
+            responsive: true,
+            language: {
                     "sProcessing": "Procesando...",
                     "lengthMenu": "Mostrar _MENU_ registros",
                     "zeroRecords": "No se encontraron resultados",
@@ -171,9 +170,9 @@
             });
         
         
-        $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();   
-        });
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
 
 </script>
 </html>

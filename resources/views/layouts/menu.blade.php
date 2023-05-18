@@ -150,7 +150,7 @@
                 </li>
                 
                 <li>
-                    <a class="nav-link" href="/alistamiento">
+                    <a class="nav-link" href="/checkplanillas">
                         <i class="fas fa-dollar-sign"></i><span class="caret">Revisar Planilla</span>
                     </a>
                 </li>

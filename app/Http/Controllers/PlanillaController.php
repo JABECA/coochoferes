@@ -32,33 +32,64 @@ class PlanillaController extends Controller
     }
 
 
-    public function index(Request $request)
-    {
-         if ($request->ajax()) {
+    public function index(Request $request) {
 
-            
-            $num_interno = $request->get('num_interno');
-            
+        if ($request->ajax()) {
+
             $userName = \Illuminate\Support\Facades\Auth::user()->name;
 
-            if (  
-                  ( $request->has('num_interno')  && !empty($request->get('num_interno')) )
-               ) {
+            if (  ( $request->has('mes')  && !empty($request->get('mes')) ) &&
+                  ( $request->has('num_interno')  && !empty($request->get('num_interno')) ) ) {
 
+                    $documento    = 'fecha';                   
+                    $mes          = $request->get('mes');
                     $num_interno  = $request->get('num_interno');
-                    $planillas = Planilla::where('numero_interno' , $num_interno)->orderBy('id', 'desc')->get();
-                    
-                    // dd($planillas);
+
+                    $planillas = Planilla::select('numero_interno', DB::raw('count(numero_interno) as total') )
+                                            ->whereMonth($documento, $mes )
+                                            ->where('numero_interno', $num_interno)
+                                            ->groupBy('numero_interno')
+                                            ->get();
+
+                    for ($i=0; $i < sizeof($planillas); $i++) { 
+                        $id = Planilla::where('numero_interno', $planillas[$i]['numero_interno'])->whereMonth('fecha', $mes)->max('id');
+                        $planillas[$i]->id = $id;
+                    }
+
                     return DataTables::of($planillas)
                             ->addColumn('actions', 'planillas.actions')
                             ->rawColumns(['actions'])
                             ->make(true);
                    
             }
+
             
-            // $numerosInternos = Numerosinternos::All(); 
-            $planillas = Planilla::All(); 
-             // dd($planillas);
+            if (  ( $request->has('mes')  && !empty($request->get('mes')) ) ) {
+
+                    $documento    = 'fecha';                   
+                    $mes       = $request->get('mes');
+                    
+                    $planillas = Planilla::select('numero_interno', DB::raw('count(numero_interno) as total') )
+                                            ->whereMonth($documento, $mes )
+                                            ->groupBy('numero_interno')
+                                            ->get();
+
+                    for ($i=0; $i < sizeof($planillas); $i++) { 
+                        $id = Planilla::where('numero_interno', $planillas[$i]['numero_interno'])->whereMonth('fecha', $mes)->max('id');
+                        $planillas[$i]->id = $id;
+                    }
+                    
+                    return DataTables::of($planillas)
+                            ->addColumn('actions', 'planillas.actions')
+                            ->rawColumns(['actions'])
+                            ->make(true);
+                   
+            }
+
+
+            
+            
+            $planillas = Planilla::where('numero_interno' , 0)->get();
             
             return DataTables::of($planillas)
                     ->addColumn('actions', 'planillas.actions')
@@ -73,10 +104,93 @@ class PlanillaController extends Controller
         
     }
 
+
+    public function revisar(Request $request)
+    {
+        
+        setlocale(LC_ALL, 'es_ES');
+        date_default_timezone_set('America/Bogota');
+        $mes_actual = date("m");
+        $dia_actual = date("d") ;
+
+        if ($request->ajax()) {
+            
+            $userName = \Illuminate\Support\Facades\Auth::user()->name;
+
+            if ( ( $request->has('fecha_ini')  && !empty($request->get('fecha_ini'))) &&  ( $request->has('fecha_fin')  && !empty($request->get('fecha_fin'))) ) {
+                    
+                    $documento    = 'fecha';
+                    $fecini = $request->get('fecha_ini');
+                    $fecfin = $request->get('fecha_fin');
+                    $num_interno  = $request->get('num_interno');
+
+                    $planillas = Planilla::whereBetween($documento, [$fecini, $fecfin] )
+                                            // ->where('numero_interno' , $num_interno)
+                                            ->orderBy('id', 'desc')
+                                            ->get();
+
+                    return DataTables::of($planillas)
+                            ->addColumn('actions', 'planillas.actions')
+                            ->rawColumns(['actions'])
+                            ->make(true);
+                   
+            }
+
+
+            if (                   
+                  ( $request->has('num_interno')  && !empty($request->get('num_interno')) )
+               ) {
+                    
+                    $documento    = 'fecha';
+                    if ($request->get('mes') ) {
+                       $mes       = $request->get('mes');                    
+                    }else{
+                       $mes       = $mes_actual;
+                    }                   
+                    
+                    
+                    $num_interno  = $request->get('num_interno');
+
+                    // $planillas = Planilla::whereBetween($documento, [$fecini, $fecfin] )
+                    //                         ->where('numero_interno' , $num_interno)
+                    //                         ->orderBy('id', 'desc')
+                    //                         ->get();
+                     $planillas = Planilla::whereMonth($documento, $mes )
+                                            ->where('numero_interno' , $num_interno)
+                                            ->orderBy('id', 'desc')
+                                            ->get();
+                    // $planillas = Planilla::where('numero_interno' , $num_interno)->orderBy('id', 'desc')->get();
+                    
+                    // dd($planillas);
+                    return DataTables::of($planillas)
+                            ->addColumn('actions', 'planillas.actions')
+                            ->rawColumns(['actions'])
+                            ->make(true);
+                   
+            }
+            
+            // $numerosInternos = Numerosinternos::All(); 
+            $planillas = Planilla::where('estado_planilla' , 0)->orderBy('id', 'desc' )->limit(10)->get();
+             // dd($planillas);
+            // $planillas = [];
+            
+            return DataTables::of($planillas)
+                    ->addColumn('actions', 'planillas.actions')
+                    ->rawColumns(['actions'])
+                    ->make(true);
+            
+        }
+
+        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+       
+        return view('planillas.revisar', compact('Numerosinternos'));
+        
+    }
+
     public function pdf(Planilla $planilla)
     {
         // SELECT * FROM `planillas` WHERE numero_interno = 134 and fecha BETWEEN '2023-04-01' and '2023-04-20';
-       
+        // dd($planilla);
         //extraemos el mes del registro seleccionado
         $fecha = $planilla->fecha;
         $mes = date('m', strtotime($fecha));

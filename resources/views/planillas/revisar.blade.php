@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Administrar planillas de alistamiento</h3>
+            <h3 class="page__heading">Revisar planillas de alistamiento</h3>
         </div>
         <?php 
             $fecha_actual = date("d-m-Y");
@@ -28,7 +28,7 @@
                             <div class="col-md-2">
                                 <label>N&uacutemero Interno:</label>
                                 <select class="select2 form-control num_interno" name="num_interno" id="num_interno">
-                                        <option value="" selected>Seleccionar todos los Veh&iacuteculos: </option>
+                                        <option value="" selected>Seleccione un Veh&iacuteculo: </option>
                                         <?php 
                                         foreach ($Numerosinternos as $key => $value) {
                                             echo "<option value='".$value."'> ".$value."<option/>";
@@ -57,15 +57,15 @@
                                 </select>
                             </div>
 
-                           <!--  <div class="col-md-3">
+                          <div class="col-md-3">
                                 <label>Fecha Ini: </label>
-                                <input type="date" name="fecha_registro" class="form-control fecha_ini" />
+                                <input type="date" name="fecha_ini" class="form-control fecha_ini" />
                             </div>
 
                             <div class="col-md-3">
                                 <label>Fecha Fin: </label>
-                                <input type="date" name="fecha_registro" class="form-control fecha_fin" />
-                            </div> -->
+                                <input type="date" name="fecha_fin" class="form-control fecha_fin" />
+                            </div>
 
                      
                             <div class="col-md-1">
@@ -77,7 +77,7 @@
                         </div>
 
                         @can('crear-planillas')
-                        <a class="btn btn-warning" href="{{ route('planillas.create') }}">Nueva</a> <br><br>                       
+                        <!-- <a class="btn btn-warning" href="{{ route('planillas.create') }}">Nueva</a> <br><br>                        -->
                         @endcan 
 
                             <!-- <div class="table-responsive"> -->
@@ -85,7 +85,12 @@
                                     <thead class="tabla-header-bg">
                                         <th style="display: none;">ID</th>                                                       
                                         <th style="color:#fff;"># Interno</th>
-                                        <th style="color:#fff;">Total registros mes</th> 
+                                        <th style="color:#fff;">Fecha</th>
+                                        <th style="color:#fff;">Conductor</th>
+                                        <th style="color:#fff;">Estado Planilla</th>
+                                        <th style="color:#fff;">Estado Veh&iacuteculo</th>
+                                        <th style="color:#fff;">Supervisor</th>
+                                        <th style="color:#fff;">Fecha Supervision</th>
                                         <th style="color:#fff;">Acciones</th>
                                     </thead>  
                                     <tbody>
@@ -129,27 +134,30 @@
         $(document).ready(function () {
 
             $(".num_interno").select2();
-            // $(".fecha_ini").flatpickr();
-            // $(".fecha_fin").flatpickr();
             $(".mes").select2();
+
+            $(".fecha_ini").flatpickr();
+            $(".fecha_fin").flatpickr();
+            
 
             const table = $('.planillas').DataTable({
 
                     processing: true,
                     serverSide: true,
                     responsive: true,
+                    searchable: true,
                     ajax: {
-                        url: "{{route('planillas.index')}}",
+                        url: "{{route('planillas.revisar')}}",
                         data: function(d) {
                             d.num_interno  = $('.num_interno').val(),
-                            d.mes = $('.mes').val()
-                            // d.fecha_ini = $('.fecha_ini').val(),
-                            // d.fecha_fin  = $('.fecha_fin').val()
+                            d.mes = $('.mes').val(),
+                            d.fecha_ini = $('.fecha_ini').val(),
+                            d.fecha_fin  = $('.fecha_fin').val()
                         },
                     },
                      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
                       "iDisplayLength": 10,
-                      "aaSorting": [[1, 'desc']],
+                      "aaSorting": [[2, 'desc']],
                     dataType: 'json',
                     type: "POST",
                     dom: 'lBrtip',
@@ -160,7 +168,7 @@
                             name: 'id',
                             searchable: true,
                             orderable: true,
-                            visible: true
+                            visible: false
 
                         },
                         {
@@ -170,20 +178,72 @@
                             orderable: true
                         },
                         {
-                            data: 'total',
-                            name: 'Total registros mes',
+                            data: 'fecha',
+                            name: 'Fecha Planilla',
                             searchable: true,
                             orderable: true
 
                         },
+                        {
+                            data: 'conductor',
+                            name: 'Conductor',
+                            searchable: true,
+                            orderable: true
+
+                        },
+
                        
+                        {
+                            "title": "Estado Planilla",
+                            "data": "estado_planilla",
+                            render: function(data, type, row, meta ) {
+                                if(row.estado_planilla == null || row.estado_planilla == 0 ){
+                                    return '<a class="btn btn-danger btn-sm" href="#" data-bs-toggle="mensaje" title="Pdte de Supervision" style="margin-right: 6px;">Pendiente Supervision</a>';
+                                }else if(row.estado_planilla != null )
+                                    return '<a class="btn btn-success btn-sm" href="#" data-bs-toggle="mensaje" title="Planilla Supervisada" style="margin-right: 6px;">Supervisado</a>';
+                            }
+                        },
+                         {
+                            data: 'estado_vehiculo',
+                            name: 'Estado Vehículo',
+                            render: function(data, type, row, meta ) {
+                                
+                                if(row.estado_vehiculo == null ){
+                                    return '';
+                                }else if(row.estado_vehiculo == 1 && row.estado_planilla == 1){
+                                    return '<a class="btn btn-success btn-sm" href="#" data-bs-toggle="mensaje" title="Vehiculo Activo" style="margin-right: 6px;"><i class="far fa-check-square"></a>';
+                                }else if(row.estado_vehiculo == 0 && row.estado_planilla == 1 )
+                                    return '<a class="btn btn-danger btn-sm" href="#" data-bs-toggle="mensaje" title="Vehiculo Inactivo" style="margin-right: 6px;"><i class="far fa-times-circle"></a>';
+                                else{
+                                    return '';
+                                }
+                            }
+                        },
+
+                        {
+                            data: 'usr_supervisa',
+                            name: 'Usr Supervisor'
+                        },
+                        {
+                            data: 'fecha_supervision',
+                            name: 'Fecha Supervision',
+                            searchable: false,
+                            orderable: false,
+                            visible: false
+                        },
+
                         {
                             "title": "Acciones",
                             "data": "id",
                             className: "table_align_center",
                             render: function(data, type, row, meta ) {
                                 // href="/vehiculos/'+data+'/edit"
-                                return '<div class="btn-group"><a class="btn btn-info" href="/planillas/'+data+'/pdf" data-bs-toggle="mensaje" title="Ver Planillas" style="margin-right: 10px;"><i class="fas fa-glasses"></i></a></div>';
+                                if(row.estado_planilla == 0){
+                                    return '<div class="btn-group"><a class="btn btn-warning" href="/planillas/'+data+'/edit" data-bs-toggle="mensaje" title="Editar" style="margin-right: 4px;"><i class="fas fa-edit"></i></a></div>';
+                                }else if(row.estado_planilla == 1){
+                                     return '<div class="btn-group"><a class="btn btn-warning" href="#" data-bs-toggle="mensaje" title="Vehiculo ya supervisado" style="margin-right: 4px;"><i class="fas fa-edit"></i></a></div>';
+                                }
+                                
                             }
                         }
                     ]
