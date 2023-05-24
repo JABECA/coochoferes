@@ -292,6 +292,26 @@ class PlanillaController extends Controller
 
         //verificamos si el vehiculo ya tiene una planilla creada para el dia actual
         $verifica_planilla = Planilla::where('numero_interno', $num_interno)->where('fecha','like', $today)->get();
+
+
+        //***************************************************************************para los vencimientos de documentos conductor y vehiculo***********************************************************
+        $vencimientos = array();
+        $venc_docts = Vehiculos::select('fec_venc_SOAT', 'fec_venc_RTM', 'fec_venc_TOP', 'id_conductor', 'fec_venc_mto')->where('num_interno', $num_interno)->get();
+        foreach ($venc_docts as $key => $value) {
+            $fec_venc_SOAT = $value['fec_venc_SOAT'];
+            $fec_venc_RTM  = $value['fec_venc_RTM'];
+            $fec_venc_TOP  = $value['fec_venc_TOP'];
+            $id_conductor  = $value['id_conductor'];
+            $fec_venc_mto  = $value['fec_venc_mto'];
+        }
+        $ven_lic_cond = Persona::select('fec_venc_licencia')->where('id', $id_conductor)->get();
+        foreach ($ven_lic_cond as $key => $value) {
+            $fec_venc_licencia = $value['fec_venc_licencia'];
+        }
+        $vencimientos = array('fec_venc_SOAT'=>$fec_venc_SOAT, 'fec_venc_RTM'=> $fec_venc_RTM, 'fec_venc_TOP'=> $fec_venc_TOP, 'fec_venc_licencia'=> $fec_venc_licencia, 'fec_venc_mto'=> $fec_venc_mto );
+        //*************************************************************************************************************************************************************************************************
+
+
        
         // dd($verifica_planilla);
         // dd(\DB::getQueryLog());
@@ -301,9 +321,9 @@ class PlanillaController extends Controller
         // dd($verifica_planilla);
        
         if ($verifica_planilla == 0) {
-           return view('planillas.crear', compact('vehiculo', 'num_interno', 'conductor', 'verifica_planilla' ));
+           return view('planillas.crear', compact('vehiculo', 'num_interno', 'conductor', 'verifica_planilla', 'vencimientos' ));
         }else if($verifica_planilla == 1){
-            return view('planillas.creada', compact('num_interno', 'hoy'));
+            return view('planillas.creada', compact('num_interno', 'hoy', 'vencimientos'));
         }
 
 
