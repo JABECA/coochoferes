@@ -533,7 +533,7 @@ class PlanillaController extends Controller
 
         $planilla->save();
 
-         return redirect()->route('planillas.index');
+         return redirect()->route('planillas.revisar');
     }
 
     /**

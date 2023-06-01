@@ -1,3 +1,5 @@
+
+
 <form class="form-inline mr-auto" action="#">
     <ul class="navbar-nav mr-3">
         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
@@ -7,57 +9,6 @@
 
     @if(\Illuminate\Support\Facades\Auth::user())
         
-                @if ( \Illuminate\Support\Facades\Auth::user()->hasAnyRole('Conductor') )    
-                <ul class="nav navbar-nav navbar-left">
-
-                    <li class="dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#"><i class="fa fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge" style="background-color: #dde60b; color: black; ">Vencimientos</span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            
-                            <li> 
-                                <label class="">&nbsp; Licencia &nbsp;: </label>
-                                <span class="badge badge-warning " style="background-color: red;">{{$vencimientos['fec_venc_licencia']}}</span>
-                               
-                            </li>
-                            
-                            <li class="divider"></li>  <!--divide seccion en menu -->
-
-                            <li>
-                               <label>&nbsp; SOAT &nbsp;&nbsp;&nbsp;&nbsp; :</label>
-                                    <span class="badge badge-warning navbar-badge" style="background-color: red;">{{$vencimientos['fec_venc_SOAT']}}</span>
-                                
-                            </li>
-
-                            <li class="divider"></li>  <!--divide seccion en menu -->
-
-                            <li>
-                                <label>&nbsp; RTM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  : </label>
-                                    <span class="badge badge-warning navbar-badge" style="background-color: red;">{{$vencimientos['fec_venc_RTM']}}</span>
-                                
-                            </li>
-
-                            <li>
-                                <label>&nbsp; TOP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  : </label>
-                                    <span class="badge badge-warning navbar-badge" style="background-color: red;">{{$vencimientos['fec_venc_TOP']}}</span>
-                                
-                            </li>
-
-                            <li>
-                                <label>&nbsp; Mto Prev :</label>
-                                    <span class="badge badge-warning navbar-badge" style="background-color: red;">{{$vencimientos['fec_venc_TOP']}}</span>
-                                
-                            </li>
-
-                        </ul>
-                    </li>
-                </ul>
-                @endif
-
-
-
-
         <li class="dropdown">
             <a href="#" data-toggle="dropdown"
                class="nav-link dropdown-toggle nav-link-lg nav-link-user">

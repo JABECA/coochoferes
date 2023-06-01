@@ -9,7 +9,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Administrar planillas de alistamiento</h3>
+            <h3 class="page__heading">Administrar Planillas de Alistamiento</h3>
         </div>
         <?php 
             $fecha_actual = date("d-m-Y");

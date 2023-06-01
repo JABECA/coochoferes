@@ -17,11 +17,36 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-       
+                        
+                        <div class="row justify-content-center">
+                            
+                            <div class="col-md-1" style="padding-top: 30px;">
+                                <label>Filtro por tipo de persona: </label>
+                            </div>
+
+                            <div class="col-md-2" style="padding-top: 30px;">
+                                <select class="select2 form-control tipo_persona" name="tipo_persona">
+                                    <option value="">Todos</option>
+                                    <option value="id_propietario">Propietarios</option>
+                                    <option value="id_conductor">Conductores</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-1">
+                                <label style="color: white;">Filtrar</label>
+                                <button class="form-control btn btn-info" id="filtrar"><i class="fa fa-search"></i></button>
+                            </div>
+                           
+                            
+                        </div>
+
+
                         @can('crear-persona')
                         <a class="btn btn-warning" href="{{ route('personas.create') }}">Nuevo</a> <br><br>                       
                         @endcan 
-        
+
+                       
+
                             <!-- <div class="table-responsive"> -->
                                 <table id="vehiculos" class="table table-striped table-bordered shadow-lg mt-4 dt-responsive" style="width:100%;">
                                     <thead class="tabla-header-bg">
@@ -179,7 +204,7 @@
                  "sProcessing":"Procesando...",
             },
             responsive: "true",
-            dom: 'Bfrtip',  //dom: 'lBfrtip',
+            dom: 'lBfrtip',  //dom: 'lBfrtip',
             buttons:[ 
                 {
                     extend:    'excelHtml5',

@@ -207,7 +207,7 @@
                             d.num_interno  = $('.num_interno').val()
                         },
                     },
-                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Toditos"]],
+                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
                       "iDisplayLength": 10,
                       "aaSorting": [[1, 'desc']],
                     dataType: 'json',

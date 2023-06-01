@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Regpasajeros;
 use App\Models\Numerosinternos;
+use App\Models\Vehiculos;
+use App\Models\Persona;
 use Session;
 
 class RegpasajerosController extends Controller
@@ -21,6 +23,22 @@ class RegpasajerosController extends Controller
          $this->middleware('permission:borrar-regpasajeros', ['only' => ['destroy']]);
 
     }
+
+
+    public function byInsidencias($num_interno){
+        
+        $id_conductor =  Vehiculos::where('num_interno', $num_interno)->get();
+
+        $id_conductor = $id_conductor[0]['id_conductor'];
+
+        return Persona::where('id', $id_conductor)->get();
+
+        // dd($data_conductor);
+    
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +72,7 @@ class RegpasajerosController extends Controller
                     // $regpasajeros = Regpasajeros::whereBetween($documento, [$fecini, $fecfin] )
                     //                         ->where('num_interno' , $num_interno)
                     //                         ->get();
-                     $regpasajeros = Regpasajeros::where('num_interno' , $num_interno)->where('estado', 1)->orderBy('id', 'desc')->get();
+                    $regpasajeros = Regpasajeros::where('num_interno' , $num_interno)->where('estado', 1)->orderBy('id', 'desc')->get();
                     
                     return DataTables::of($regpasajeros)
                             ->addColumn('actions', 'regpasajeros.actions')
@@ -73,7 +91,7 @@ class RegpasajerosController extends Controller
             
         }
 
-        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+        $Numerosinternos = Vehiculos::pluck('num_interno', 'num_interno');
        
         return view('regpasajeros.index', compact('Numerosinternos'));
          // $vehiculos = Vehiculos::All();
@@ -107,7 +125,7 @@ class RegpasajerosController extends Controller
             
         }
 
-        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+        $Numerosinternos = Vehiculos::pluck('num_interno', 'num_interno');
 
         return view('regpasajeros.recaudos', compact('Numerosinternos'));
            
@@ -116,7 +134,7 @@ class RegpasajerosController extends Controller
 
     public function admrecaudo(Request $request) {
 
-    //   dd('hola entre'); die();
+       // dd('hola entre'); die();
         if ($request->ajax()) {
 
             $fecini      = $request->get('fecha_ini');
@@ -192,7 +210,7 @@ class RegpasajerosController extends Controller
             
         }
 
-        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+        $Numerosinternos = Vehiculos::pluck('num_interno', 'num_interno');
        
         return view('regpasajeros.admrecaudo', compact('Numerosinternos'));
          // $vehiculos = Vehiculos::All();
@@ -226,7 +244,7 @@ class RegpasajerosController extends Controller
             
         }
 
-        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+        $Numerosinternos = Vehiculos::pluck('num_interno', 'num_interno');
        
         return view('regpasajeros.crear', compact('Numerosinternos') );
     }
@@ -315,7 +333,7 @@ class RegpasajerosController extends Controller
     public function edit(Regpasajeros $regpasajero)
     {
         //
-        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+        $Numerosinternos = Vehiculos::pluck('num_interno', 'num_interno');
         return view('regpasajeros.editar', compact('regpasajero', 'Numerosinternos'));
     }
     
@@ -323,7 +341,7 @@ class RegpasajerosController extends Controller
     {
        
         $regpasajero->delete();
-        $Numerosinternos = Numerosinternos::pluck('num_interno', 'num_interno');
+        $Numerosinternos = Vehiculos::pluck('num_interno', 'num_interno');
         return redirect()->route('admrecaudos.admrecaudo')->with('eliminar', 'ok');
     }
 
@@ -345,7 +363,7 @@ class RegpasajerosController extends Controller
      */
     public function update(Request $request, Regpasajeros $regpasajero)
     {
-        // dd('HOLA ENTRE UPDATE'); die();
+         // dd($request); die();
         
         $regpasajero = Regpasajeros::findOrFail($request->id);
       
@@ -373,6 +391,7 @@ class RegpasajerosController extends Controller
             $regpasajero->cant_pasajeros           = $request->cant_pasajeros;
             $regpasajero->cant_pasajeros_terminal  = $request->cant_pasajeros_terminal;
             $regpasajero->valor_pasaje             = $tarifa;
+            $regpasajero->ruta                     = $request->ruta;
     
             if ($request->ruta == 'Cartago') {
                 $regpasajero->total_cuadre = ($request->cant_pasajeros*$tarifa)+($regpasajero->cant_pasajeros_terminal*$tarifa2)-30600;
@@ -415,6 +434,7 @@ class RegpasajerosController extends Controller
             $regpasajero->cant_pasajeros           = $request->cant_pasajeros;
             $regpasajero->cant_pasajeros_terminal  = $request->cant_pasajeros_terminal;
             $regpasajero->valor_pasaje             = $tarifa;
+            $regpasajero->ruta                     = $request->ruta;
     
             if ($request->ruta == 'Cartago') {
                 $regpasajero->total_cuadre = ($request->cant_pasajeros*$tarifa)+($regpasajero->cant_pasajeros_terminal*$tarifa2)-30600;

@@ -16,11 +16,31 @@
             // $minFceha = date("Y-m-d",strtotime($fecha_actual." - 7 days"));
             // $maxFecha = date("Y-m-d",strtotime($fecha_actual." + 7 days"));
 
-             $minFceha = date("Y-m-d",strtotime($fecha_actual));
+            $minFceha = date("Y-m-d",strtotime($fecha_actual));
             $maxFecha = date("Y-m-d",strtotime($fecha_actual));
 
             $time = time();
             $horaRegistro =  date("Y-m-d H:i:s", $time);
+
+            $venc_licencia = $vencimientos['fec_venc_licencia'];
+            $venc_soat     = $vencimientos['fec_venc_SOAT'];
+            $venc_rtm      = $vencimientos['fec_venc_RTM'];
+            $venc_top      = $vencimientos['fec_venc_TOP'];
+            $venc_mto      = $vencimientos['fec_venc_mto'];
+
+            $dias_venc_licencia = dias_pasados($venc_licencia,$fecha_actual);
+            $dias_venc_soat     = dias_pasados($venc_soat,$fecha_actual);
+            $dias_venc_rtm      = dias_pasados($venc_rtm,$fecha_actual);
+            $dias_venc_top      = dias_pasados($venc_top,$fecha_actual);
+            $dias_venc_mto      = dias_pasados($venc_mto,$fecha_actual);
+            
+            // echo $dias_venc_top;
+
+            function dias_pasados($fecha_inicial,$fecha_final){
+                $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
+                $dias = abs($dias); $dias = floor($dias);
+                return $dias;
+            }
 
         ?>
         <div class="section-body">
@@ -46,37 +66,105 @@
                             
                             <div class="row">
 
-                                <div class="col-xs-12 col-sm-2 col-md-2" >
+                                <div class="col-xs-12 col-sm-2 col-md-2" style="display: none;" >
                                     <div class="form-group">
-                                        <label for="">N&uacutemero Interno:</label><br>
+                                        <!-- <label for="">N&uacutemero Interno:</label><br> -->
                                         <input type="number" name="num_interno" id="num_interno" value="{{$num_interno}}" >
                                        
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-sm-3 col-md-3" >
+                                <div class="col-xs-12 col-sm-3 col-md-3" style="display: none;">
                                     <div class="form-group">
-                                        <label for="">Nombre Conductor:</label>
+                                        <!-- <label for="">Nombre Conductor:</label> -->
                                         <input  class="form-control" type="text"  name="nombre_conductor" id="nombre_conductor" value="{{$conductor}}" >
                                         <!-- {!! Form::text('usr_crea', \Illuminate\Support\Facades\Auth::user()->name , array('class' => 'form-control')) !!} -->
                                     </div>
                                 </div>
 
 
-                                <div class="col-xs-12 col-sm-2 col-md-2" >
+                                <div class="col-xs-12 col-sm-2 col-md-2" style="display: none;">
                                     <div class="form-group">
-                                        <label for="">Fecha:</label>
+                                        <!-- <label for="">Fecha:</label> -->
                                         <input type="date" name="fecha_registro" min="<?php echo $minFceha; ?>" max="<?php echo $maxFecha; ?>"  value="<?php echo $maxFecha; ?>" class="form-control fecha_registro" />  
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-2 col-md-2" style="display: none;">
                                     <div class="form-group">
-                                        <label for="">Hora:</label>
-                                        <input type="text" name="hora_registro" value="<?php echo $horaRegistro; ?>" class="form-control hora_registro" />  
+                                        <!-- <label for="">Hora:</label> -->
+                                        <input type="text" name="hora_registro" value="<?php echo $horaRegistro; ?>" class="form-control hora_registro" >  
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row col-xs-12 col-sm-12 col-md-12" style="border: solid;">
+
+                                <div class="col-md-12" style="text-align: center; text-decoration: underline;">
+                                    <h5>VENCIMIENTOS</h5><br>                                                                    
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <table id='vencimientos_conductor' class="table table-striped table-bordered table-sm " style="width:50%; margin: 0 auto; text-align: center;">
+                                        <thead >
+                                            <tr>
+                                               <th>Licencia de conducción</th>
+                                               <th>SOAT</th>
+                                               <th>RTM</th>
+                                               
+                                               <th>Mantenimiento preventivo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <?php if ($dias_venc_licencia <= 7): ?>
+                                                    <td style="color: red;">{{$vencimientos['fec_venc_licencia']}}</td>
+                                                <?php elseif ( $dias_venc_licencia > 7 && $dias_venc_licencia <= 30):?>
+                                                    <td style="color: orange;">{{$vencimientos['fec_venc_licencia']}}</td>
+                                                <?php elseif ( $dias_venc_licencia > 30):?>
+                                                    <td style="color: limegreen;">{{$vencimientos['fec_venc_licencia']}}</td>
+                                                <?php endif ?>
+
+
+
+                                                <?php if ($dias_venc_soat <= 7): ?>
+                                                    <td style="color: red;">{{$vencimientos['fec_venc_SOAT']}}</td>
+                                                <?php elseif ( $dias_venc_soat > 7 && $dias_venc_soat <= 30):?>
+                                                    <td style="color: orange;">{{$vencimientos['fec_venc_SOAT']}}</td>
+                                                <?php elseif ( $dias_venc_soat > 30  ):?>
+                                                    <td style="color: limegreen;">{{$vencimientos['fec_venc_SOAT']}}</td>
+                                                <?php endif ?>
+
+
+
+                                                <?php if ($dias_venc_rtm <= 7): ?>
+                                                    <td style="color: red;">{{$vencimientos['fec_venc_RTM']}}</td>
+                                                <?php elseif ( $dias_venc_rtm > 7 && $dias_venc_rtm <= 30 ):?>
+                                                    <td style="color: orange;">{{$vencimientos['fec_venc_RTM']}}</td>
+                                                <?php elseif ( $dias_venc_rtm > 30 ):?>
+                                                    <td style="color: limegreen;">{{$vencimientos['fec_venc_RTM']}}</td>
+                                                <?php endif ?>
+
+
+                                             
+
+                                                
+
+                                                <?php if ($dias_venc_mto <= 7): ?>
+                                                   <td style="color: red;">{{$vencimientos['fec_venc_mto']}}</td> 
+                                                <?php elseif ( $dias_venc_mto > 7 && $dias_venc_mto <= 30):?>
+                                                    <td style="color: orange;">{{$vencimientos['fec_venc_mto']}}</td>
+                                                <?php elseif ( $dias_venc_mto > 30 ):?>
+                                                    <td style="color: limegreen;">{{$vencimientos['fec_venc_mto']}}</td>
+                                                <?php endif ?>
+                                                   
+                                            </tr>
+                                        </tbody>
+                                    </table><br>
+                                </div>
+                               
+                                
+                            </div><br>
 
 
                             <div class="row col-xs-12 col-sm-12 col-md-12" style="border: solid;">

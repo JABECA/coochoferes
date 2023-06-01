@@ -74,7 +74,11 @@
                                     <div class="col-xs-12 col-sm-3 col-md-3">
                                         <div class="form-group">
                                             <label for="cod_recaudo">Conduce:</label>
-                                            <input class="form-control" type="text" name="cod_recaudo"  value="{{ $regpasajero->cod_recaudo }}" >
+                                            @if ($regpasajero->cod_recaudo != '')
+                                                <input class="form-control" type="text" name="cod_recaudo"  value="{{ $regpasajero->cod_recaudo }}" >
+                                            @else
+                                                <input class="form-control" type="text" name="cod_recaudo"  value="{{ $regpasajero->cod_recaudo }}" disabled >
+                                            @endif
                                         </div>
                                     </div>
 

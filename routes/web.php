@@ -89,7 +89,7 @@ Route::get('/regpasajeros/{regpasajero}/borrar',    [App\Http\Controllers\Regpas
 
 //planilas de alistamiento
 Route::get('/planillas/{planilla}/pdf',             [App\Http\Controllers\PlanillaController::class, 'pdf'                  ])->name('planillas.pdf');
-Route::get('/checkplanillas/',                       [App\Http\Controllers\PlanillaController::class, 'revisar'              ])->name('planillas.revisar');
+Route::get('/checkplanillas/',                       [App\Http\Controllers\PlanillaController::class, 'revisar'             ])->name('planillas.revisar');
 
 
 

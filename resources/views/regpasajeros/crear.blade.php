@@ -66,7 +66,8 @@
                             <div class="col-xs-12 col-sm-3 col-md-3">
                                 <div class="form-group">
                                     <label for="">Nombre Conductor:</label>
-                                    <input  class="form-control" type="text"  name="nombre_conductor" id="nombre_conductor">
+                                    <!-- <input  class="form-control" type="text"  name="nombre_conductor" id="nombre_conductor"> -->
+                                    <select class="select2 form-control nombre_conductor" name="nombre_conductor" id="nombre_conductor"></select>
                                     <!-- {!! Form::number('cant_pasajeros_terminal', null, array('class' => 'form-control')) !!} -->
                                 </div>
                             </div>
@@ -183,6 +184,29 @@
                 )
         </script>
     @endif
+
+    <!-- para rellenar el campo de conductor al cambiar el select de numero interno -->
+    <script type="text/javascript">
+         $(document).ready(function () {
+
+            $('#num_interno').on('change', function(){
+                var num_interno =  $(this).val();
+                
+                if($.trim(num_interno) != ''){
+                    $.get('/api/regpasajeros/'+num_interno+'/conductor',  function(conductor){
+                            console.log(conductor);
+                            $('#nombre_conductor').empty();
+                            // $('#placa').append("<option value=''>Seleccione una placa</option>");
+                            for (var i =0; i<conductor.length; i++) {
+                               $('#nombre_conductor').append("<option value='"+conductor[i].nombres+"'>"+conductor[i].nombres+conductor[i].apellidos+"</option>");
+                            }
+                    });
+                }
+            });
+
+
+         });
+    </script>
 
 
     <script type="text/javascript">

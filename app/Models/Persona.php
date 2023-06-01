@@ -38,6 +38,7 @@ class Persona extends Model
                             'exp_conduccion',
                             'propietario',
                             'conductor',
+                            'poder',
                             'estado',
                             'observaciones'
                           ];

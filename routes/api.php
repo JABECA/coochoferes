@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/insidentes/{num_interno}/placas', 'App\Http\Controllers\VehiculoController@byInsidencias');
+Route::get('/regpasajeros/{num_interno}/conductor', 'App\Http\Controllers\RegpasajerosController@byInsidencias');

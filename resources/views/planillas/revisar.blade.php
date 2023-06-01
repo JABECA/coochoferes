@@ -57,7 +57,7 @@
                                 </select>
                             </div>
 
-                          <div class="col-md-3">
+                           <!--  <div class="col-md-3">
                                 <label>Fecha Ini: </label>
                                 <input type="date" name="fecha_ini" class="form-control fecha_ini" />
                             </div>
@@ -65,7 +65,7 @@
                             <div class="col-md-3">
                                 <label>Fecha Fin: </label>
                                 <input type="date" name="fecha_fin" class="form-control fecha_fin" />
-                            </div>
+                            </div> -->
 
                      
                             <div class="col-md-1">
@@ -89,7 +89,7 @@
                                         <th style="color:#fff;">Conductor</th>
                                         <th style="color:#fff;">Estado Planilla</th>
                                         <th style="color:#fff;">Estado Veh&iacuteculo</th>
-                                        <th style="color:#fff;">Supervisor</th>
+                                        <th style="color:#fff;">Despachador</th>
                                         <th style="color:#fff;">Fecha Supervision</th>
                                         <th style="color:#fff;">Acciones</th>
                                     </thead>  
