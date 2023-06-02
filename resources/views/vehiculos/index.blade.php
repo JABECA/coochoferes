@@ -89,9 +89,11 @@
                                         <th style="color:#fff;">Venc RTM</th>
                                         <th style="color:#fff;"># TOP</th>
                                         <th style="color:#fff;">Venc TOP</th>
-                                        <th style="color:#fff;">Ciudad TOP</th>
+                                        <th style="color:#fff;">Ciudad Matricula</th>
                                         <th style="color:#fff;">Propietario</th>
                                         <th style="color:#fff;">Conductor</th>
+                                        <th style="color:#fff;">id_Propietario</th>
+                                        <th style="color:#fff;">id_Conductor</th>
                                         <th style="color:#fff;">Obser.</th>
                                         <th style="color:#fff;">Acciones</th>
                                     </thead>  
@@ -197,6 +199,7 @@
                     processing: true,
                     serverSide: true,
                     responsive: true,
+
                     ajax: {
                         url: "{{route('vehiculos.index')}}",
                         data: function(d) {
@@ -209,10 +212,12 @@
                     },
                      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
                       "iDisplayLength": 10,
-                      "aaSorting": [[1, 'desc']],
+                      "order": [[0, 'ASC']],
                     dataType: 'json',
                     type: "POST",
-                    columns: [{
+                    columns: [
+
+                        {
                             data: 'id',
                             name: 'id',
                             searchable: true,
@@ -224,7 +229,8 @@
                             data: 'num_interno',
                             name: '# interno',
                             searchable: true,
-                            orderable: true
+                            orderable: true,
+                            visible: true
                         },
                         {
                             data: 'placa',
@@ -308,21 +314,34 @@
                             data: 'num_TOP',
                             name: '# TOP'
                         },
-                        {
-                            data: 'ciudad_TOP',
-                            name: 'Ciudad TOP'
-                        },
-                        {
+                         {
                             data: 'fec_venc_TOP',
                             name: 'Fec Venc TOP'
                         },
                         {
+                            data: 'ciudad_TOP',
+                            name: 'Ciudad Matricula'
+                        },
+                       
+                        {
+                            data: 'fullname_propietario',
+                            name: 'Propietario',
+                            visible: true
+                        },
+                          {
+                            data: 'fullname_conductor',
+                            name: 'Conductor',
+                            visible: true
+                        },
+                        {
                             data: 'id_propietario',
-                            name: 'Propietario'
+                            name: 'Propietario',
+                            visible: false
                         },
                           {
                             data: 'id_conductor',
-                            name: 'Conducto'
+                            name: 'Conductor',
+                            visible: false
                         },
                           {
                             data: 'observaciones',

@@ -9,6 +9,7 @@ use App\Models\Ciudades;
 use App\Models\Persona;
 use App\Models\Insidente;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class VehiculoController extends Controller
 {
@@ -45,7 +46,22 @@ class VehiculoController extends Controller
             if (  ( $request->has('status_id') && !empty($request->get('status_id') ) ) ) {
                     $estado    = $request->get('status_id');
                     $estado = $request->get('status_id') == 2 ? $estado = 0 : $estado = $estado;
-                    $vehiculos = Vehiculos::All()->where('estado', $estado);
+                    // $vehiculos = Vehiculos::All()->where('estado', $estado);
+                     $vehiculos = Vehiculos::
+                                join("personas as propietarios", "propietarios.id", "=", "vehiculos.id_propietario")
+                                -> join("personas as conductores", "conductores.id", "=", "vehiculos.id_conductor")
+                                ->select( "vehiculos.id", "vehiculos.num_interno", "vehiculos.placa", "vehiculos.chasis", "vehiculos.carroceria", "vehiculos.modelo", "vehiculos.marca", "vehiculos.img_frontal",
+                                          "vehiculos.img_posterior","vehiculos.img_laterald","vehiculos.img_laterali","vehiculos.cant_pasajeros","vehiculos.motor","vehiculos.tipo_combustible", "vehiculos.num_SOAT",
+                                          "vehiculos.fec_venc_SOAT","vehiculos.num_RTM","vehiculos.fec_venc_RTM","vehiculos.num_TOP","vehiculos.ciudad_TOP","vehiculos.fec_venc_TOP","vehiculos.fec_venc_mto","vehiculos.id_propietario",
+                                          "vehiculos.id_conductor", "vehiculos.estado","vehiculos.observaciones","vehiculos.usr_crea","vehiculos.created_at","vehiculos.updated_at", 
+                                           "propietarios.nombres as nom_prop",  "propietarios.apellidos as ape_prop", "conductores.nombres as nom_cond", "conductores.apellidos as ape_cond",
+                                           DB::raw('CONCAT(propietarios.nombres, propietarios.apellidos) AS fullname_propietario'),
+                                           DB::raw('CONCAT(conductores.nombres, conductores.apellidos) AS fullname_conductor')
+                                      )
+                                ->where('vehiculos.estado', $estado)
+                                ->get();
+                    // dd($vehiculos);
+
                     return DataTables::of($vehiculos)
                             ->addColumn('actions', 'vehiculos.actions')
                             ->rawColumns(['actions'])
@@ -57,7 +73,21 @@ class VehiculoController extends Controller
                     $estado    = $request->get('status_id');
                     $estado = $request->get('status_id') == '' ? $estado = 1 : $estado = $estado;
                     
-                    $vehiculos = Vehiculos::All()->where('estado', $estado)->where('num_interno', $num_interno);
+                    // $vehiculos = Vehiculos::All()->where('estado', $estado)->where('num_interno', $num_interno);
+                    $vehiculos = Vehiculos::
+                                join("personas as propietarios", "propietarios.id", "=", "vehiculos.id_propietario")
+                                -> join("personas as conductores", "conductores.id", "=", "vehiculos.id_conductor")
+                                ->select( "vehiculos.id", "vehiculos.num_interno", "vehiculos.placa", "vehiculos.chasis", "vehiculos.carroceria", "vehiculos.modelo", "vehiculos.marca", "vehiculos.img_frontal",
+                                          "vehiculos.img_posterior","vehiculos.img_laterald","vehiculos.img_laterali","vehiculos.cant_pasajeros","vehiculos.motor","vehiculos.tipo_combustible", "vehiculos.num_SOAT",
+                                          "vehiculos.fec_venc_SOAT","vehiculos.num_RTM","vehiculos.fec_venc_RTM","vehiculos.num_TOP","vehiculos.ciudad_TOP","vehiculos.fec_venc_TOP","vehiculos.fec_venc_mto","vehiculos.id_propietario",
+                                          "vehiculos.id_conductor", "vehiculos.estado","vehiculos.observaciones","vehiculos.usr_crea","vehiculos.created_at","vehiculos.updated_at", 
+                                           "propietarios.nombres as nom_prop",  "propietarios.apellidos as ape_prop", "conductores.nombres as nom_cond", "conductores.apellidos as ape_cond",
+                                           DB::raw('CONCAT(propietarios.nombres, propietarios.apellidos) AS fullname_propietario'),
+                                           DB::raw('CONCAT(conductores.nombres, conductores.apellidos) AS fullname_conductor')
+                                      )
+                                ->where('vehiculos.estado', $estado)->where('vehiculos.num_interno', $num_interno)
+                                ->get();
+
                     return DataTables::of($vehiculos)
                             ->addColumn('actions', 'vehiculos.actions')
                             ->rawColumns(['actions'])
@@ -78,9 +108,23 @@ class VehiculoController extends Controller
                 
                      // echo $condicion1 ; die();  //whereBetween("fec_venc_SOAT", ["2022-12-26 ", "2022-12-31"])
 
-                    $vehiculos = Vehiculos::whereBetween($documento, [$fecini, $fecfin])
-                                            // ->orderBy($documento ,'ASC')
-                                            ->get();
+                    // $vehiculos = Vehiculos::whereBetween($documento, [$fecini, $fecfin])
+                    //                         // ->orderBy($documento ,'ASC')
+                    //                         ->get();
+                    $vehiculos = Vehiculos::
+                                join("personas as propietarios", "propietarios.id", "=", "vehiculos.id_propietario")
+                                -> join("personas as conductores", "conductores.id", "=", "vehiculos.id_conductor")
+                                ->select( "vehiculos.id", "vehiculos.num_interno", "vehiculos.placa", "vehiculos.chasis", "vehiculos.carroceria", "vehiculos.modelo", "vehiculos.marca", "vehiculos.img_frontal",
+                                          "vehiculos.img_posterior","vehiculos.img_laterald","vehiculos.img_laterali","vehiculos.cant_pasajeros","vehiculos.motor","vehiculos.tipo_combustible", "vehiculos.num_SOAT",
+                                          "vehiculos.fec_venc_SOAT","vehiculos.num_RTM","vehiculos.fec_venc_RTM","vehiculos.num_TOP","vehiculos.ciudad_TOP","vehiculos.fec_venc_TOP","vehiculos.fec_venc_mto","vehiculos.id_propietario",
+                                          "vehiculos.id_conductor", "vehiculos.estado","vehiculos.observaciones","vehiculos.usr_crea","vehiculos.created_at","vehiculos.updated_at", 
+                                           "propietarios.nombres as nom_prop",  "propietarios.apellidos as ape_prop", "conductores.nombres as nom_cond", "conductores.apellidos as ape_cond",
+                                           DB::raw('CONCAT(propietarios.nombres, propietarios.apellidos) AS fullname_propietario'),
+                                           DB::raw('CONCAT(conductores.nombres, conductores.apellidos) AS fullname_conductor')
+                                      )
+                                ->whereBetween($documento, [$fecini, $fecfin])
+                                ->get();
+
                     
                     return DataTables::of($vehiculos)
                             ->addColumn('actions', 'vehiculos.actions')
@@ -89,8 +133,26 @@ class VehiculoController extends Controller
                    
             }
              
-            $vehiculos = Vehiculos::where('estado', 1)->orderBy('num_interno', 'asc')->get();    
+            // $vehiculos = Vehiculos::where('estado', 1)->orderBy('num_interno', 'asc')->get();
             // $vehiculos = [];
+            
+            $vehiculos = Vehiculos::
+                                join("personas as propietarios", "propietarios.id", "=", "vehiculos.id_propietario")
+                                -> join("personas as conductores", "conductores.id", "=", "vehiculos.id_conductor")
+                                ->select( "vehiculos.id", "vehiculos.num_interno", "vehiculos.placa", "vehiculos.chasis", "vehiculos.carroceria", "vehiculos.modelo", "vehiculos.marca", "vehiculos.img_frontal",
+                                          "vehiculos.img_posterior","vehiculos.img_laterald","vehiculos.img_laterali","vehiculos.cant_pasajeros","vehiculos.motor","vehiculos.tipo_combustible", "vehiculos.num_SOAT",
+                                          "vehiculos.fec_venc_SOAT","vehiculos.num_RTM","vehiculos.fec_venc_RTM","vehiculos.num_TOP","vehiculos.ciudad_TOP","vehiculos.fec_venc_TOP","vehiculos.fec_venc_mto","vehiculos.id_propietario",
+                                          "vehiculos.id_conductor", "vehiculos.estado","vehiculos.observaciones","vehiculos.usr_crea","vehiculos.created_at","vehiculos.updated_at", 
+                                           "propietarios.nombres as nom_prop",  "propietarios.apellidos as ape_prop", "conductores.nombres as nom_cond", "conductores.apellidos as ape_cond",
+                                           DB::raw('CONCAT(propietarios.nombres, propietarios.apellidos) AS fullname_propietario'),
+                                           DB::raw('CONCAT(conductores.nombres, conductores.apellidos) AS fullname_conductor')
+                                      )
+
+                                ->get();
+
+            // dd($vehiculos);
+
+            
             return DataTables::of($vehiculos)
                     ->addColumn('actions', 'vehiculos.actions')
                     ->rawColumns(['actions'])
